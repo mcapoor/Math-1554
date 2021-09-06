@@ -1,0 +1,722 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[12pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{letterpaper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+\usepackage{parskip}
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+%%% END Article customizations
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\mateq}{$A \vec{x} = \vec{b}$}
+%%% The "real" document content comes below...
+\pagenumbering{arabic}
+
+\title{Math 1554}
+\author{Milan Capoor}
+\date{Fall 2021} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+
+\section{Module 1: Linear Equations}
+\subsection{TOPIC 1: Systems of Linear Equations}
+\emph{Linear equation:} an equation in the form $a_1 x_1 + a_2 x_2 + ... + a_n x_n = b$ where $a_n$ and $b$ are real or complex coefficients of the variables $x_n$\\
+
+\emph{Linear system (system of linear equations):} a collection of linear equations involving the same variables\\
+
+\emph{Solution:} a list of values ($s_1, s_2, ..., s_n$) for which substitution into the variables 
+($x_1, x_2, ... , x_n$) makes the equations true\\
+\indent - Found where the equations’ lines intersect \\
+
+\emph{Solution set:} the collection of all solutions to a linear system\\
+
+\emph{Equivalent:} characteristic of two linear systems if they have the same solution sets\\
+
+\emph{Consistent system:} a linear system which has infinitely many solutions or one solution\\
+\indent - Happens when the lines intersect at a single point or when the lines coincide\\
+
+\emph{Inconsistent system:} system with no solutions\\
+\indent - When the lines are parallel\\
+
+
+
+\emph{Matrix:} the essential information of a linear system can be recorded compactly in a rectangular array\\
+Given the system
+\begin{align*}
+x_1 - 2x_2 + x_3 &= 0\\
+\;	2x_2 - 8x_3 &= 8\\
+5x_1\; 	- 5x_3 &= 10\\
+\end{align*}
+The \emph{coefficient matrix}
+\begin{center}
+	$\begin{bmatrix}
+		1 & -2 & 1\\ 
+		0 & 2 & -8 \\
+		5 & 0 & -5\\
+	\end{bmatrix}$
+\end{center}
+encodes the essential information of the system while the \emph{augmented matrix} is \\
+\begin{center}
+	$\begin{bmatrix}
+		1 & -2 & 1 & 0\\ 
+		0 & 2 & -8 & 8\\
+		5 & 0 & -5 & 10\\
+	 \end{bmatrix}$
+\end{center}
+
+An $m \times n$ matrix is a rectangular array of numbers with $m$ rows and $n$ columns.
+
+\subsubsection{Solving a linear system}
+The basic strategy is to \emph{replace one system with an equivalent system that is easier to solve}. Three basic operations are used to simplify a linear system: 
+\begin{enumerate}
+\item (Replacement) Replace one equation by the sum of itself and a multiple of another equation 
+\item (Interchange) Swap two equations
+\item (Scaling) Multiply all the terms in an equation by a nonzero constant
+\end{enumerate}
+
+\subsubsection{Example 1: Solve the system given above}
+\begin{align*}
+	x_1 - 2x_2 + x_3 &= 0\\
+	\;	2x_2 - 8x_3 &= 8\\
+	5x_1\; 	- 5x_3 &= 10\\
+\end{align*}
+
+\indent Row Reduction Procedure:
+\begin{enumerate}
+	\item Construct the augmented matrix
+		\begin{center}
+			$\begin{bmatrix}
+				1 & -2 & 1 & 0\\ 
+				0 & 2 & -8 & 8\\
+				5 & 0 & -5 & 10\\
+			 \end{bmatrix}$
+		\end{center}
+	\item $R_3 - 5R_1$
+		\begin{center}
+			$\begin{bmatrix}
+				1 & -2 & 1 & 0\\ 
+				0 & 2 & -8 & 8\\
+				0 & 10 & -10 & 10\\
+			 \end{bmatrix}$
+		\end{center}
+	\item $\frac{1}{2} R_2$
+		\begin{center}
+			$\begin{bmatrix}
+				1 & -2 & 1 & 0\\ 
+				0 & 1 & -4 & 4\\
+				5 & 0 & -5 & 10\\
+			 \end{bmatrix}$
+		\end{center}
+	\item $R_3 - 10R_2$
+		\begin{center}
+			$\begin{bmatrix}
+				1 & -2 & 1 & 0\\ 
+				0 & 1 & -4 & 4\\
+				0 & 0 & 30 & -30\\
+			 \end{bmatrix}$
+		\end{center}
+	\item $\frac{1}{30}R_3$
+		\begin{center}
+			$\begin{bmatrix}
+				1 & -2 & 1 & 0\\ 
+				0 & 1 & -4 & 4\\
+				0 & 0 & 1 & -1\\
+			 \end{bmatrix}$
+		\end{center}
+	\item $R_1 - R_3 and R_2 + 4R_3$
+		\begin{center}
+			$\begin{bmatrix}
+				1 & -2 & 0 & 1\\ 
+				0 & 1 & 0 & 0\\
+				0 & 0 & 1 & -1\\
+			 \end{bmatrix}$
+		\end{center}
+	\leavevmode \\
+	\item $R_1 + 2R_2$
+		\begin{center}
+			$\begin{bmatrix}
+				1 & 0 & 0 & 1\\ 
+				0 & 1 & 0 & 0\\
+				0 & 0 & 1 & -1\\
+			 \end{bmatrix}$
+		\end{center}
+	\item Verify the solution $(1, 0, -1)$ by substituting it for $(x_1, x_2, x_3)$ in the original system
+		\begin{align*}
+			(1) - 2(0) + (-1) &= 0\\
+			2(0) - 8(-1) &= 8\\
+			5(1) - 5(-1) &= 10\\
+		\end{align*}
+\end{enumerate}
+The equations agree so $(1, 0, -1)$ is indeed a solution to the system. $\blacksquare$\\
+
+These row operations can be applied to any matrix \textemdash not just those that arise as the augmented matrices of a linear system.\\
+
+\emph{Row equivalent:} quality of two matrices if there exists a sequence of elementary row operations that transforms one matrix into the other\\
+
+\textbf{All row operations are reversible. Hence, \emph{If the augmented matrices of two linear systems are row equivalent, then the two systems have the same solution set.}}
+
+\subsubsection{Existence and Uniqueness}
+A large focus of the course and of the analysis of linear systems generally depends on asking two questions:
+\begin{itemize}
+	\item Is the system consistent?
+	\item If a solution exists, is it unique?
+\end{itemize}
+These questions can often be answered from the triangular form of the matrix (in Example 1 this was $\begin{bmatrix}1 & -2 & 1 & 0\\ 0 & 1 & -4 & 4\\0 & 0 & 1 & -1\\ \end{bmatrix}$) by understanding that $x_3 = -1$ and solving the other equations from there. \\
+If this method creates contradictions, however, such as in the system $\begin{bmatrix}a & b & c & d\\ e & f & g & h\\0 & 0 & 0 & 1\\ \end{bmatrix}$, then the originial system is inconsistent. \\
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{TOPIC 2: Row Reduction and Echelon Forms}
+\emph{Nonzero:} any row or column which contains at least one nonzero entry\\
+
+\emph{Leading entry:} the leftmost nonzero entry of a row\\
+
+\emph{Row echelon form:} a matrix is in row echelon form if it has the following three properties:
+\begin{enumerate}
+	\item All nonzero rows are above any rows of all zeros
+	\item Each leading entry of a row is in a column to the right of the leading entry of the row above it
+	\item All entries in a column below a leading entry are zeroes
+\end{enumerate}
+\emph{Reduced echelon form:} a matrix in row echelon form which satisfies the additional criteria:
+\begin{enumerate}
+\addtocounter{enumi}{3}
+\item The leading entry in each nonzero row is 1
+\item Each leading 1 is the only nonzero entry in its column
+\end{enumerate}
+These are the "triangular" matrices of section 1.1.\\
+
+\textbf{\emph{Each matrix is row equivalent to one and only one reduced echelon matrix.}}\\
+
+If a matrix $A$ is row equivalent to an echelon matrix $U$, we call $U$ an \emph{(reduced) echelon form (REF/RREF) of $A$}\\
+
+\subsubsection{Pivot Positions}
+\emph{Pivot position:} a location in a matrix $A$ that corresponds to a leading 1 in the reduced echelon form of $A$.\\
+
+\emph{Pivot column:} a column of $A$ that contains a pivot position\\
+\subsubsection{Example 2: Row reduce matrix A below to echelon form and locate its pivot columns.}
+\begin{center}
+	$A = \begin{bmatrix}
+			0 & -3 & -6 & 4 & 9\\
+			-1 & -2 & -1 & 3 & 1\\
+			-2 & -3 & 0 & 3 & -1\\
+			1 & 4 & 5 & -9 & -7\\
+		\end{bmatrix}$
+\end{center}
+Solution:
+\begin{enumerate}
+\item Interchange $R_1$ and $R_4$
+	\begin{center}
+		$\begin{bmatrix}
+			1 & 4 & 5 & -9 & -7\\
+			-1 & -2 & -1 & 3 & 1\\
+			-2 & -3 & 0 & 3 & -1\\
+			0 & -3 & -6 & 4 & 9\\
+		\end{bmatrix}$
+	\end{center}
+\item $R_2 + R_1$ and $R_3 + 2R_1$
+	\begin{center}
+		$\begin{bmatrix}
+			1 & 4 & 5 & -9 & -7\\
+			0 & 2 & 4 & -6 & -6\\
+			0 & 5 & 10 & -15 & -15\\
+			0 & -3 & -6 & 4 & 9\\
+		\end{bmatrix}$
+	\end{center}
+\item $R_3 -\frac{5}{2}R_2$ and $R_4 + \frac{3}{2}R_2$
+	\begin{center}
+		$\begin{bmatrix}
+			1 & 4 & 5 & -9 & -7\\
+			0 & 2 & 4 & -6 & -6\\
+			0 & 0 & 0 & 0 & 0\\
+			0 & 0 & 0 & -5 & 0\\
+		\end{bmatrix}$
+	\end{center}
+\leavevmode \\
+\item Interchange $R_3$ and $R_4$
+	\begin{center}
+		$\begin{bmatrix}
+			1 & 4 & 5 & -9 & -7\\
+			0 & 2 & 4 & -6 & -6\\
+			0 & 0 & 0 & -5 & 0\\
+			0 & 0 & 0 & 0 & 0\\
+		\end{bmatrix}$
+	\end{center}	
+\end{enumerate}
+Matrix $A$ is thus in echelon form and so columns 1, 2, and 4 are pivot columns.\\
+
+\emph{Pivot:} a nonzero number in a pivot position which is used during row reduction to create zeros\\
+
+\subsubsection{The Row Reduction Algorithm}
+\begin{enumerate}
+	\item Begin with the leftmost nonzero column. This is a pivot column. The pivot position is at the top.
+	\item Select a nonzero entry in the pivot column as a pivot. If necessary, interchange rows to move this entry into the pivot position. 
+	\item Use row replacement operations to create zeros in all positions below the pivot.
+	\item Cover the row containing the pivot position and all rows above it. Apply steps 1-3 to the remaining submatrix, iterating until there are no more nonzero rows to modify. At this time we have the row echelon form.
+	\item This step is used to find the reduced row echelon form. Beginning with the righmost pivot and working upward and to the left, create zeros above each pivot. If a pivot is not 1, make it 1 via scaling operation.
+\end{enumerate}
+\leavevmode \\
+\subsubsection{Solutions of Linear Systems}
+The row reduction algorithm leads directly to the solution set of a system when the algorithm is applied to the augmented matrix of the system.\\
+
+\emph{Basic variables:} the variables of a linear system corresponding to pivot columns in the reduced echelon matrix \\
+
+\emph{Free variables:} the other variables in the system\\
+
+Whenever a system is consistent, the solution set can be described explicitly by solving the reduced system of equations for the basic variables in terms of the free variables.\\
+Each different choice of a free variable determines a (different) solution of the system and every solution of the system is determined by a choice of the free variables.
+
+\subsubsection{Example 4: Find the general solution of the linear system whose augmented matrix has been reduced to}
+\begin{center}
+	$\begin{bmatrix}
+		1 & 6 & 2 & -5 & -2 & -4\\
+		0 & 0 & 2 & -8 & -1 & 3\\
+		0 & 0 & 0 & 0 & 1 & 7
+	\end{bmatrix}$
+\end{center}
+Moving from echelon form to reduced echelon form we have:\\
+
+$\begin{bmatrix}
+	1 & 6 & 2 & -5 & -2 & -4\\
+	0 & 0 & 2 & -8 & -1 & 3\\
+	0 & 0 & 0 & 0 & 1 & 7
+\end{bmatrix}$
+\textasciitilde 
+$\begin{bmatrix}
+	1 & 6 & 2 & -5 & 0 & 10\\
+	0 & 0 & 2 & -8 & 0 & 10\\
+	0 & 0 & 0 & 0 & 1 & 7
+\end{bmatrix}$
+\textasciitilde 
+$\begin{bmatrix}
+	1 & 6 & 2 & -5 & 0 & 10\\
+	0 & 0 & 1 & -4 & 0 & 5\\
+	0 & 0 & 0 & 0 & 1 & 7
+\end{bmatrix}$
+\textasciitilde
+$\begin{bmatrix}
+	1 & 6 & 0 & 3 & 0 & 0\\
+	0 & 0 & 1 & -4 & 0 & 5\\
+	0 & 0 & 0 & 0 & 1 & 7\\
+\end{bmatrix}$
+
+
+
+Which is equivalent to 
+\begin{align*}
+	x_1 + 6x_2 + 3x_4 &= 0\\
+	x_3 - 4x_4 &= 5 \\
+	x_5 &= 7\\
+\end{align*}
+Because the pivot columns are 1, 3, and 5, the basic variables are $x_1, x_3, and x_5$, leaving $x_2$ and $x_4$ as free variables. Thus
+\begin{center}
+	$\begin{cases}
+		x_1 = -6x_2 - 3x_4\\
+		x_2 \text{ is free}\\
+		x_3 = 5 + 4x_4\\
+		x_4 \text{ is free}\\
+		x_5 = 7\\
+	\end{cases}$
+\end{center}
+\subsubsection{Existence and Uniqueness Questions (Redux)}
+When a system is in echelon form and contains no equation of the form $0 = b (b \neq 0)$, \emph{every} nonzero equation contains a basic variable with a nonzero coefficient. Either the basic variables are completely determined (no free variables), signifying a unique solution, or the basic variables can be expressed in terms of one or more free variables, signifying infinitely many solutions. Thus:\\
+\textbf{A linear system is consistent iff the rightmost column of the augmented matrix is \emph{not} a pivot column (i.e. there are no rows of the form $\begin{bmatrix} 0 & ... & 0 & b\end{bmatrix}$).}
+
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{TOPIC 3: Vector Equations}
+\emph{Column vector:} a matrix with only one column
+$$\mathbf{w}= \begin{bmatrix}w_1 \\ w_2 \end{bmatrix}$$
+The set of all vectors with two entries is denoted $\mathbb{R}^2$ ("r-two"), where $\mathbb{R}$ refers to the real number entries of the vector and the exponent 2 indicates that each vector contains two entries.\\
+Vectors in $\mathbb{R}$ are ordered pairs which are equal iff their corresponding entries are equal.\\
+
+Given two vectors \textbf{u} and \textbf{v} in $\R^2$, their sum is 
+\begin{center}\textbf{u} + \textbf{v} = $\begin{bmatrix}u_1 + v_1 \\ u_2 + v_2\end{bmatrix}$\end{center}
+while the scalar multiple of a vector is 
+\begin{center}c\textbf{u} = c$\begin{bmatrix}u_1 \\ u_2\end{bmatrix} =\begin{bmatrix}c\cdot u_1 \\ c\cdot u_2\end{bmatrix}  $\end{center}
+
+\subsubsection{Geometric Descriptions of $\R^2$}
+Because each point in the cartesian plane is determined by an ordered pair of numbers, we can identify a geometric point with the column vector $\begin{bmatrix}a \\ b\end{bmatrix}$. So we may regard $\R^2$ as the set of all points in the plane.\\
+
+\emph{Parellelogram rule for vector addition:} If \textbf{u} and \textbf{v} in $\R^2$ are represented as points in the plane, then $\textbf{u} + \textbf{v}$ corresponds to the fourth vertex of the parellolgram whose other vertices are $\textbf{u}$, $\textbf{0}$, and $\textbf{v}$.
+
+\subsubsection{Algebraic Properties of $\R^n$}
+For all $\bf{u}, \bf{v}, \bf{w}$ in $\R^n$ and all scalars $c$ and $d$:
+\begin{enumerate}
+	\item $\bf{u} + \bf{v} = \bf{v} + \bf{u}$
+	\item $(\bf{u + v) + w = u + (v + w)}$
+	\item $\bf{u + 0 = 0 + u = u}$
+	\item $\bf{u + (-u) = -u + u = 0}$
+	\item $c(\bf{u + v}$) = c$\bf{u}$ + c$\bf{v}$
+	\item $(c + d)\bf{u} = c\bf{u} + d\bf{u}$
+	\item $c(d\bf{u}) = (cd)\bf{u}$
+	\item $1\bf{u = u}$
+\end{enumerate}
+\leavevmode \\
+\emph{Linear combination:} a composite formed of vectors in $\R^n$ and corresponding scalar weights ($\bf{y}$$=c_1$$\bf{v_1+ ... + }$$c_p$$\bf{v_p}$)
+
+\subsubsection{Example 5: Solve $x_1\bf{a_1}$$ + x_2 $$\bf{a_2} = \bf{b} \text{ for } \bf{a_1} = \begin{bmatrix}1\\-2\\-5\end{bmatrix}, \bf{a_2} = \begin{bmatrix}2\\5\\6\end{bmatrix}\text{, and  }\bf{b} = \begin{bmatrix}7\\4\\-3\end{bmatrix}.$}
+We shall begin by constructing an augmented matrix and finding its reduced row echelon form:
+\begin{center}
+	$\begin{bmatrix}
+		1 & 2 & 7\\
+		-2 & 5 & 4\\
+		-5 & 6 & -3
+	\end{bmatrix}$
+	\textasciitilde
+	$\begin{bmatrix}
+		1 & 2 & 7\\
+		0 & 9 & 18\\
+		0 & 16 & 32
+	\end{bmatrix}$
+	\textasciitilde
+	$\begin{bmatrix}
+		1 & 2 & 7\\
+		0 & 1 & 2\\
+		0 & 1 & 2
+	\end{bmatrix}$
+	\textasciitilde
+	$\begin{bmatrix}
+		1 & 2 & 7\\
+		0 & 1 & 2\\
+		0 & 0 & 0\\
+	\end{bmatrix}$
+\end{center}
+So $x_2 = 2$ and $x_1 = 7 - 2x_2 = 3$.\\
+
+Checking: $3\begin{bmatrix}1\\-2\\-5\end{bmatrix} + 2\begin{bmatrix}2\\5\\6\end{bmatrix} = \begin{bmatrix}3 + 4\\-6 + 10\\-15 + 12\end{bmatrix} = \begin{bmatrix}7\\4\\-3\end{bmatrix} \blacksquare.$\\
+
+
+
+
+
+\emph{A vector $\bf{b}$ can be generated by a linear combination of $\bf{a_1, ..., a_n}$ iff there exists a solution to the linear system corresponding to the augmented matrix $\begin{bmatrix}\bf{a_1} & \bf{a_2} & ... & \bf{a_n} & \bf{b}\end{bmatrix}$.}\\
+One of the key ideas in linear algebra is to study the set of all vectors that can be written as a linear combination of a fixed set $\{ \bf{v_1, ..., v_p} \}$ of vectors.\\
+
+\emph{The subset of $\R^n$ spanned by $\bf{v_1}, ..., \bf{v_p}:$} (written Span$\{\bf{v_1, ..., v_p}\}$) is the collection of all vectors that can be written in the form $c_1$$\bf{v_1 }$$ + c_2$$\bf{v_2 }$$ + ... + c_p\bf{v_p}$ with $c_1, ..., c_p$ scalars.\\
+
+Asking whether a vector is in Span$\{\bf{v_1, ..., v_p}\}$ amounts to asking whether the linear system with associated augmented matric has a solution.\\
+
+Note: Span$\{\bf{v_1, ..., v_p}\}$ contains every scalar multiple of $\bf{v_1}$ including $\bf{0}$
+\subsubsection{Geometric description of Span$\{\bf{v}\}$}
+For $\bf{v} \in \R^3$, Span$\{\bf{v}\}$ is the set of points on the line in $\R^3$ through \textbf{v} and \textbf{0}.\\
+For $\textbf{u, v} \in \R^3$, Span$\{\textbf{u, v}\}$ is the plane in $\R^3$ that contains \textbf{u}, \textbf{v}, and \textbf{0}. \\
+
+\subsubsection{Example 6: Span$\{\mathbf{a_1, a_2}\}$ is a plane through the origin in 
+$\R^3$. Is $\mathbf{b}$ in that plane?}
+\begin{center}
+	($\mathbf{a_1} = \begin{bmatrix}1\\-2\\3\end{bmatrix}, 
+	\mathbf{a_2} = \begin{bmatrix}5\\-13\\-3\end{bmatrix}, 
+	\text{and }\mathbf{b} = \begin{bmatrix}-3\\8\\1\end{bmatrix}$)
+\end{center}
+
+This question amounts to asking if the equation $x_1\mathbf{a_1} + x_2\mathbf{a_2} = \mathbf{b}$ has a solution. From row reduction:
+\begin{center}
+	$\begin{bmatrix}
+		1 & 5 & -3\\
+		-2 & -13 & 8\\
+		3 & -3 & 1\\
+	\end{bmatrix}
+	\sim
+	\begin{bmatrix}
+		1 & 5 & -3\\
+		0 & -3 & 2\\
+		0 & -18 & 10\\
+	\end{bmatrix}
+	\sim
+	\begin{bmatrix}
+		1 & 5 & -3\\
+		0 & -3 & 2\\
+		0 & 0 & -2\\
+	\end{bmatrix}$
+\end{center}
+This suggests that $0 = -2$ but as this is not possible, the matrix is inconsistent and so the vector equation has no solution. Thus, $\mathbf{b}$ is not in Span\{\textbf{$a_1, a_2$}\}. $\blacksquare$
+
+
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{TOPIC 4: The Matrix Equation}
+\begin{itemize}
+\item $\in$: \indent belongs to \\
+\item $\R^n$: \indent the set of vectors with \emph{n} real-valued elements\\
+\item $\R^{m\times n}$: \indent the set of real-valued matrices with \emph{m} as rows and \emph{n} as columns\\
+\end{itemize}
+Example:
+The notation $\vec{x} \in \R^5 m$ measn that $\vec{x}$ is a vector with five real-valued elements.\\
+
+\subsubsection{Matrix-Vector Product as a Linear Combination}
+If $A \in \R^{m\times n}$ has columns $\vec{a_1}, ..., \vec{a_n}$, then the matrix vector product $A\vec{x}$ is a linear combination of the columns of \emph{A}. 
+$$A\vec{x} = \sum_{n=1}^n x_n \vec{a_n}$$
+Note that $A\vec{x}$ is in the span of the columns of A.\\
+
+This means that the solution sets for 
+$$A\vec{x} = \vec{b}$$
+is the same as
+$$x_1\vec{a_1} + ... + x_n\vec{a_n} = \vec{b}$$
+which is again equivalent to the set of linear equations with the augmented matrix
+$$\begin{bmatrix}
+	\vec{a_1} & \vec{a_2} & ... & \vec{a_n} & \vec{b_n}
+\end{bmatrix}$$
+
+\subsubsection{Example:} 
+Suppose that $A = \begin{bmatrix}1 & 0\\ 0 & -3\end{bmatrix}$ and $\vec{x} = \binom{2}{3}$\\
+\begin{enumerate}
+\item The following product can be written as a linear combination of vectors:
+$$A\vec{x} = 2 \binom{1}{0} + 3 \binom{0}{-3} = \binom{2}{-9}$$
+
+\item Is $\vec{b} = \binom{2}{9}$ in the span of the columns of A?\\
+If $\vec{b} \in Span\{A\}$, then $\vec{b} = c_1 \binom{1}{0} + c_2 \binom{0}{-3}$. This is true for $\vec{c} = \binom{2}{-3}$ so $\vec{b} \in Span\{A_{col}\}$
+\end{enumerate}
+
+\textbf{The equation \mateq  has a solution iff $\vec{b}$ is a linear combination of the columns of $A$}
+
+\subsubsection{Example: For what vectors
+$\vec{b} = \begin{bmatrix}b_1\\b_2\\b_3\\\end{bmatrix}$ does the equation have a solution?}
+$$ \begin{bmatrix}
+	1&3&4\\
+	2&8&4\\
+	0&1&-2\\
+\end{bmatrix} \vec{x} = \vec{b}$$
+
+Solution: 
+$$\begin{bmatrix}
+	1 & 3 & 4 & b_1\\
+	2 & 8 & 4 & b_2\\
+	0 & 1& -2 & b_3\\
+\end{bmatrix} \sim 
+\begin{bmatrix}
+	1 & 3 & 4 & b_1\\
+	0 & 2 & -4 & b_2 - 2b_1\\
+	0 & 1& -2 & b_3\\
+\end{bmatrix} \sim 
+\begin{bmatrix}
+	1 & 3 & 4 & b_1\\
+	0 & 2 & -4 & b_2 - 2b_1\\
+	0 & 0 & 0 & b_3 - \frac{1}{2}b_2 + b_1\\
+\end{bmatrix}$$
+So $$ \vec{b} = \begin{bmatrix} -\frac{1}{2}b_2 + b_3\\ b_2 \\ b_3\end{bmatrix}$$
+
+Essential concept:
+If $A$ is an $m\times n$ matrix, the following statements are logically equivalent -- for a particular $A$, \emph{all} are true or \emph{all} are false:
+\begin{itemize}
+	\item For each \textbf{b} in $\R^m$, the equation $A\mathbf{x} = \mathbf{b}$ has a solution.
+	\item Each \textbf{b} in $\R^m$ is a linear combination of the columns of $A$
+	\item The columns of $A$ span $\R^m$
+	\item $A$ has a pivot position in every row
+\end{itemize}
+
+\subsubsection{Summary: Ways of representing Linear Systems}
+\begin{enumerate}
+	\item A list of equations
+	\item An augmented matrix
+	\item A vector equation
+	\item A matrix equation
+\end{enumerate}
+
+\subsubsection{Matrix-vector products}
+If $A$ is an $m\times n$ matrix, \textbf{u} and \textbf{b} are vectors in $\R^n$, and $c$ is a scalar, then:
+\begin{itemize}
+	\item $A(\mathbf{u} + \mathbf{v}) = A\mathbf{u} + A\mathbf{v}$
+	\item $A(c\mathbf{u}) = c(A\mathbf{u})$
+\end{itemize}
+
+Moreover, the product $A\mathbf{x}$ can be easily calculated by taking advantage of the nature of a Matrix-vector product:
+$$\begin{bmatrix}
+	a_1 & a_2 & a_3\\
+	a_4 & a_5 & a_6\\
+	a_7 & a_8 & a_9\\
+\end{bmatrix}\begin{bmatrix}
+	x_1\\
+	x_2\\
+	x_3\\
+\end{bmatrix} = \begin{bmatrix}
+	a_1 x_1 + a_2 x_2 + a_3 x_3\\
+	a_4 x_1 + a_5 x_2 + a_6 x_3\\
+	a_7 x_1 + a_8 x_2 + a_9 x_3\\
+\end{bmatrix}$$
+
+\emph{The identity matrix:} denoted $\mathbf{I}$, this $n\times n$ matrix contains 1's on the diagonal and 0's elsewhere, creating the universal property that $\mathbf{I_n x} = \mathbf{x} \text{  for every  } \mathbf{x} \in \R^n$
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{TOPIC 5: Solution sets of Linear Systems}
+\emph{Homogenous:} characteristic of linear systems of the form \mateq, $\vec{b} = \vec{0}$\\
+
+\emph{Inhomogeneous:} systems of the form \mateq, $\vec{b} \neq \vec{0}$\\
+
+Because homogenous systems always have trivial solutions, the interesting question comes in asking whether they have non-trivial solutions.
+
+
+\begin{center}
+	$A \vec{x} = 0$ has a nontrivial solution $\iff$ there is a free variable $\iff A$ has a column with no pivot
+\end{center}
+
+
+\subsubsection{Example: Identify the free variables and the solution set for}
+\begin{align*}
+	x_1 + 3x_2 + x_3 &= 0\\
+	2x_1 - x_2 - 5x_3 &= 0\\
+	x_1 - 2x_3 &= 0
+\end{align*}
+
+$$\begin{bmatrix}
+	1 & 3 & 1 & 0\\
+	2 & -1 & -5 & 0\\
+	1 & 0 & -2 & 0
+\end{bmatrix} \sim
+\begin{bmatrix}
+	1 & 3 & 1 & 0\\
+	0 & -7 & -7 & 0\\
+	0 & -3 & -3 & 0
+\end{bmatrix} \sim
+\begin{bmatrix}
+	1 & 3 & 1 & 0\\
+	0 & 1 & 1 & 0\\
+	0 & 1 & 1 & 0
+\end{bmatrix} \sim
+\begin{bmatrix}
+	1 & 0 & -2 & 0\\
+	0 & 1 & 1 & 0\\
+	0 & 0 & 0 & 0\\
+\end{bmatrix}$$
+
+Row 3 has no pivot ($x_3$ is free) so there is a non-trivial solution. 
+$$
+\begin{cases}
+	x_1 = &2x_3\\
+	x_2 = &-x_3\\
+	x_3 &\text{is free}
+\end{cases} \implies x_3 \begin{bmatrix} 2 \\ -1\\ 1\end{bmatrix}$$
+\pagebreak
+\subsubsection{Parametric vector forms}
+\emph{Parametric vector form:} a more convenient way of expressing the solutions of a linear system, taking advantage of the geometric interpretation of a linear system. In general, for free variables $x_k, ... x_n$ of $A\vec{x} = 0$, the solutions can all be written as $\vec{x} = \sum_{n=k}^n x_n\vec{v_n}$
+
+$$\begin{bmatrix}
+	1 & 3 & 1 & 0\\
+	2 & -1 & -5 & 0\\
+	1 & 0 & -2 & 0
+\end{bmatrix} \sim
+\begin{bmatrix}
+	1 & 0 & -2 & 0\\
+	0 & 1 & 1 & 0\\
+	0 & 0 & 0 & 0\\
+\end{bmatrix}$$
+\begin{align*}
+	x_1 - 2x_3 &= 0\\
+	x_2 + x_3 &= 0\\
+	0 &= 0
+\end{align*}
+So $x_3$ is a free variable. Thus, rearranging we have
+$$\vec{x} = 
+	\begin{bmatrix}
+		x_1 \\ x_2 \\ x_3
+	\end{bmatrix} 
+	= 
+	\begin{bmatrix}
+		2x_3 \\ - x_3 \\ x_3
+	\end{bmatrix}
+	= 
+	x_3\begin{bmatrix}2\\-1\\1\end{bmatrix}
+$$
+
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{TOPIC 6: Linear Independence}
+A set of vectors {$\vec{v_1}, ..., \vec{v_k}$} $\in \R^n$ are linearly independent if $\sum_{n=1}^k = c_k \vec{v_k} = 0$ has only the trivial solution ($\vec{c} = \vec{0}$). It is linearly dependent otherwise. 
+
+Establishing linear independence is thus equivalent to asking whether the equation $V\vec{c} = 0$ ($V \in \R^k :=$ the matrix corresponding to the linear combinations of the vectors) is only true for $\vec{c} = \vec{0}$
+
+Example: For what values of $h$ is the set of vectors linearly independent? 
+$$
+	\begin{bmatrix}
+		1\\1\\h
+	\end{bmatrix}, 
+	\begin{bmatrix}
+		1\\h\\1
+	\end{bmatrix}, 
+	\begin{bmatrix}
+		h\\1\\1
+	\end{bmatrix}
+$$
+$$
+\begin{bmatrix}
+	1 & 1 & h & 0\\
+	1 & h & 1 & 0\\
+	h & 1 & 1 & 0\\
+\end{bmatrix} \sim 
+\begin{bmatrix}
+	1 & 1 & h & 0\\
+	0 & h - 1 & 1 - h & 0\\
+	0 & 1 - h & 1 - h^2 & 0\\
+\end{bmatrix} \sim 
+\begin{bmatrix}
+	1 & 1 & h & 0\\
+	0 & h - 1 & 1 - h & 0\\
+	0 & 0 & 2 - h - h^2 & 0\\
+\end{bmatrix}
+$$
+
+If $2 - h - h^2 = 0$ then we have a free variable and the vectors will be linearly dependent (because there will be more solutions than the trivial case).
+
+Factoring, we get 
+$$0 = -(h + 2)(h - 1)$$
+so for the vectors to be independent, 
+$$h \neq \{-2, 1\}$$
+
+\subsubsection{Linear Independence Theorems}
+\begin{enumerate}
+	\item More Vectors Than Elements
+		\indent For vectors $\vec{v}_1, ..., \vec{v}_k \in \R^n$, if $k > n$, then $\{\vec{v}_1, ..., \vec{v}_k\}$ is linearly dependent (because not every column of the matrix $A = (\vec{v}_1, ..., \vec{v}_k)$ would be pivotal). 
+	\item Set Contains Zero Vector
+		\indent If any one or more of $\vec{v}_1, ..., \vec{v}_k$ is $\vec{0}$, then $\{\vec{v}_1, ..., \vec{v}_k\}$ is linearly dependent (again because there would be non-pivotal columns of the corresponding matrix).
+
+
+\end{enumerate}
+\end{document}
