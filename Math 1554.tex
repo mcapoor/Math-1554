@@ -635,37 +635,50 @@ $$
 \end{cases} \implies x_3 \begin{bmatrix} 2 \\ -1\\ 1\end{bmatrix}$$
 \pagebreak
 \subsubsection{Parametric vector forms}
-\emph{Parametric vector form:} a more convenient way of expressing the solutions of a linear system, taking advantage of the geometric interpretation of a linear system. In general, for free variables $x_k, ... x_n$ of $A\vec{x} = 0$, the solutions can all be written as $\vec{x} = \sum_{n=k}^n x_n\vec{v_n}$
+\emph{Parametric vector form:} a more convenient way of expressing the solutions of a linear system, taking advantage of the geometric interpretation of a linear system. In general, for free variables $x_k, ... x_n$ of $A\vec{x} = 0$, the solutions can all be written as 
+$$\vec{x} = \sum_{n=k}^n x_n\vec{v_n}$$
+In other words, solving an equation amounts to finding an explicit description of the solution plane as a set spanned by \textbf{u} and \textbf{v}. Thus, the equation from earlier describing the solution set can also be written as 
+$$\mathbf{x} = s\mathbf{u} + t\mathbf{v} \quad (s, t \in \R)$$
+emphasising the role of the free variables as arbitrary scalar multiples of the vectors forming a plane.
+
+\subsubsection{Example: Describe all solutions of $A\mathbf{x} = \mathbf{b}$}
+$$A = \begin{bmatrix}
+	3 & 5 & -4\\
+	-3 & -2 & 4\\
+	6 & 1 & -8
+\end{bmatrix} \text{and} \quad \mathbf{b} = \begin{bmatrix}
+	7\\
+	-1\\
+	-4\\
+\end{bmatrix}$$
 
 $$\begin{bmatrix}
-	1 & 3 & 1 & 0\\
-	2 & -1 & -5 & 0\\
-	1 & 0 & -2 & 0
+	3 & 5 & -4 & 7\\
+	-3 & -2 & 4 & -1\\
+	6 & 1 & -8 & -4
 \end{bmatrix} \sim
 \begin{bmatrix}
-	1 & 0 & -2 & 0\\
-	0 & 1 & 1 & 0\\
+	1 & 0 & -\frac{4}{3} & -1\\
+	0 & 1 & 0 & 2\\
 	0 & 0 & 0 & 0\\
 \end{bmatrix}$$
-\begin{align*}
-	x_1 - 2x_3 &= 0\\
-	x_2 + x_3 &= 0\\
-	0 &= 0
-\end{align*}
-So $x_3$ is a free variable. Thus, rearranging we have
-$$\vec{x} = 
-	\begin{bmatrix}
-		x_1 \\ x_2 \\ x_3
-	\end{bmatrix} 
-	= 
-	\begin{bmatrix}
-		2x_3 \\ - x_3 \\ x_3
-	\end{bmatrix}
-	= 
-	x_3\begin{bmatrix}2\\-1\\1\end{bmatrix}
-$$
 
+Thus $x_1 = -1 +\frac{4}{3}x_3,  x_2=2$, and $x_3$ is free. The general form vector is 
+$$\mathbf{x} = \begin{bmatrix}
+	-1\\
+	2\\
+	0\\
+\end{bmatrix} + x_3\begin{bmatrix}
+	\frac{4}{3}\\
+	0\\
+	1\\
+\end{bmatrix} \implies \mathbf{x} = \mathbf{p} + x_3 \mathbf{v}$$
+By replacing $x_3$ with a general parameter $t \in \R$, we have a universal solution for nonhomogenous systems:
 
+\textbf{$\mathbf{x} = \mathbf{p} + t \mathbf{v}$ is a solution for $Ax = b$ which is parallel to the line of the solution set $Ax = 0$ because it is a translation of v by the particular solution p} 
+
+\subsubsection{Theorem:}
+Suppose the equation $Ax=b$ is consistent for some given \textbf{b} and let \textbf{p} be a solution. The solution set of $Ax =b$ is the set of all vectors of the form $\mathbf{w} = \mathbf{p} + \mathbf{v}_h$ where $\mathbf{v}_h$ is any solution of the homogenous equation $Ax=b$
 %----------------------------------------------------------------------------------------------------------------------------------------%
 
 \subsection{TOPIC 6: Linear Independence}
@@ -716,7 +729,9 @@ $$h \neq \{-2, 1\}$$
 		\indent For vectors $\vec{v}_1, ..., \vec{v}_k \in \R^n$, if $k > n$, then $\{\vec{v}_1, ..., \vec{v}_k\}$ is linearly dependent (because not every column of the matrix $A = (\vec{v}_1, ..., \vec{v}_k)$ would be pivotal). 
 	\item Set Contains Zero Vector
 		\indent If any one or more of $\vec{v}_1, ..., \vec{v}_k$ is $\vec{0}$, then $\{\vec{v}_1, ..., \vec{v}_k\}$ is linearly dependent (again because there would be non-pivotal columns of the corresponding matrix).
-
-
+	\item A set containing only one vector is linearly independent iff \textbf{v} is not the zero vector
+	\item Sets of two vectors can be determined to be linearly dependent by inspection if one is a multiple of the other.
+	\item In geometric terms, two vectors are linearly dependent iff they lie on the same lie through the origin.
 \end{enumerate}
+
 \end{document}
