@@ -734,4 +734,214 @@ $$h \neq \{-2, 1\}$$
 	\item In geometric terms, two vectors are linearly dependent iff they lie on the same lie through the origin.
 \end{enumerate}
 
+%----------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{TOPIC 7: Introduction to Linear Transformations}
+Instead of as a linear combination of variables, matrices can also be viewed as a \emph{function} from one set of vectors to another. Thus, solving the equation $Ax=b$ amounts to finding all vectors \textbf{x} in $\R^4$ that are transformed into the vector \textbf{b} in $\R^2$ under the "action" of multiplication by $A$.\\ 
+
+\emph{Transformation (function, mapping):} a rule that assigns to each vector $\mathbf{x} \in \R^n$ a vector $T(x) \in \R^m$. \\
+
+\emph{Domain:} The set $\R^n$ is the domain of T ($T \in \R^n$)
+
+\emph{Codomain:} The set $\R^m$ is the codomain of T ($T \in \R^n$)\\
+
+This domain-codomain relationship is expressed in the notation $T: \R^n \to \R^m$\\
+
+\emph{Image:} this is the "resultant" vector of the transformation 
+$$T(x)\in \R^m \text{ for } \mathbf{x}\in \R^n \implies$$
+\begin{center}
+ "The vector T(x) is the image of x under the action of T"
+\end{center}
+
+\emph{Range:} The set of all images of T(x) is the range of T. This is equivalent to the Span of the columns of a matrix.
+
+For example, $f(x) = \sin x : \R \mapsto \R$, so the domain is $\R$, the codomain is $\R$, and the range is [-1, 1]
+
+A function $T : \R^n \mapsto \R^m$ is linear if
+\begin{itemize}
+	\item $T(\vec{u} + \vec{v}) = T(\vec{u}) + T(\vec{v}) \quad \forall \vec{u}, \vec{v} \in \R^n$
+	\item $T(c\vec{v}) = cT(\vec{v}) \quad \forall \vec{v} \in \R^n, c \in \R$
+\end{itemize}
+
+\emph{Principle of superposition:}
+$$T(c_1 \vec{v}_1 + ... + c_k \vec{v}_k) = c_1 T(\vec{v}_1 + ... + c_k T(\vec{v}_k)$$
+
+\textbf{Every matrix transformation $T_A$ is linear.}
+
+\subsubsection{Matrix Transformations}
+A matrix transformation (a mapping where $\forall \mathbf{x} \in \R^n, T(x) =  A\mathbf{x} \quad (A \in \R^{m \times n})$) can be written as $\mathbf{x} \mapsto A\mathbf{x}$
+
+Geometric interpretations of transforms in $\R^2$:
+\begin{enumerate}
+	\item $A = \begin{bmatrix}
+		0 & 1\\1 & 0\\	
+		\end{bmatrix}$ is a reflection through $x_1 = x_2$
+	
+	\item $A = \begin{bmatrix}
+		1 & 0\\0 & 0\\	
+	\end{bmatrix}$ is a projection onto the x-axis ($\begin{bmatrix}
+		x_1\\ 0\\
+	\end{bmatrix}$)
+
+	\item $A = \begin{bmatrix}
+		k & 0\\0 & k\\	
+	\end{bmatrix}$ is a scaling by k 
+\end{enumerate}
+
+Geometric interpretations of transforms in $\R^2$:
+\begin{enumerate}
+	\item $A = \begin{bmatrix}
+		1&0&0\\
+		0&1&0\\
+		0&0&0\\
+		\end{bmatrix}$ is a projection onto the $x_1, x_2$-plane ($T(\vec{x}) = \begin{bmatrix}
+		a\\b\\0
+		\end{bmatrix}$)
+	\item $A = \begin{bmatrix}
+			1&0&0\\
+			0&-1&0\\
+			0&0&1\\
+		\end{bmatrix}$ is a reflection through the $x_1, x_3$-plane ($T(\vec{x}) = \begin{bmatrix}
+		a\\-b\\c
+		\end{bmatrix}$)
+\end{enumerate}
+
+\emph{Standard vectors in $\R^n$:}
+$$\vec{e}_1 = \begin{bmatrix}
+	1\\0\\0\\\vdots\\0\
+\end{bmatrix}, \quad \vec{e}_2 = \begin{bmatrix}
+	0\\1\\0\\\vdots\\0
+\end{bmatrix}, \quad \vec{e}_n = \begin{bmatrix}
+	0\\0\\0\\\vdots\\1
+\end{bmatrix}$$
+
+Multiplying a matrix by $\vec{e}_i$ gives column $i$ of $A$
+
+\subsubsection{Standard transform matrices}
+Counterclockwise rotation by angle $\theta$ about (0, 0):
+$$T(x) = A\vec{x} = \begin{bmatrix}
+	\cos \theta & -\sin \theta\\
+	\sin \theta & \cos \theta\\
+\end{bmatrix}$$
+
+Reflection through $x_1$-axis:
+$$T(x) = \begin{bmatrix}
+	1 & 0\\
+	0 & -1\\
+\end{bmatrix}$$
+
+Reflection through $x_2$-axis:
+$$T(x) = \begin{bmatrix}
+	-1 & 0\\
+	0 & 1\\
+\end{bmatrix}$$
+
+Reflection through $x_2 = x_1$:
+$$T(x) = \begin{bmatrix}
+	0 & 1\\
+	1 & 0\\
+\end{bmatrix}$$
+
+Reflection through $x_2 = -x_1$
+$$T(x) = \begin{bmatrix}
+	0 & -1\\
+	-1 & 0\\
+\end{bmatrix}$$
+
+Horizontal contraction:
+$$T(x) = \begin{bmatrix}
+	k & 0\\
+	0 & 1\\
+\end{bmatrix}, \quad |k| < 1$$
+
+Horizontal expansion:
+$$T(x) = \begin{bmatrix}
+	k & 0\\
+	0 & 1\\
+\end{bmatrix}, \quad |k| > 1$$
+
+Vertical contraction:
+$$T(x) = \begin{bmatrix}
+	1 & 0\\
+	0 & k\\
+\end{bmatrix}, \quad |k| < 1$$
+
+Vertical expansion:
+$$T(x) = \begin{bmatrix}
+	1 & 0\\
+	0 & k\\
+\end{bmatrix}, \quad |k| > 1$$
+
+Horizontal shear (left):
+$$T(x) = \begin{bmatrix}
+	1 & k\\
+	0 & 1\\
+\end{bmatrix}, \quad k < 0$$
+
+Horizontal shear (right):
+$$T(x) = \begin{bmatrix}
+	1 & k\\
+	0 & 1\\
+\end{bmatrix}, \quad k > 0$$
+
+Vertical shear (down):
+$$T(x) = \begin{bmatrix}
+	1 & 0\\
+	k & 1\\
+\end{bmatrix}, \quad k < 0$$
+
+Vertical shear (up):
+$$T(x) = \begin{bmatrix}
+	1 & 0\\
+	k & 1\\
+\end{bmatrix}, k > 0$$
+
+Projection onto the $x_1$-axis:
+$$T(x) = \begin{bmatrix}
+	1 & 0\\
+	0 & 0\\
+\end{bmatrix}$$
+
+Projection onto the $x_2$-axis:
+$$T(x) = \begin{bmatrix}
+	0 & 0\\
+	0 & 1\\
+\end{bmatrix}$$
+
+ \emph{Onto transform:} a transform for which $A\vec{x} = \vec{b}$
+ \quad - This is an existence property, for any $\vec{b} \in \R^m, A\vec{x} = \vec{b}$ has a solution
+ \quad - T is onto iff its standard matrix has a pivot in every row
+
+ \emph{One-to-one transform:} a transform for which there is at most one solution to $ A\vec{x} = \vec{b}$
+ \quad - This uniqueness property does not assert existence for all $\vec{b}$
+ \quad - T is one-to-one iff the only solution to $T(\vec{x}) = \vec{0}$ is $\vec{x} = \vec{0}$
+ \quad - T is one-to-one iff every column of A is pivotal
+
+ Onto means that the columns of A span $\R^n$
+
+ One-to-one means that the only solution is the trivial one and A has linearly independent columns
+
+\subsubsection{Example: Constructing a standard matrix}
+Define a linear transformation by
+$$T(x_1, x_2) = (3x_1 + x_2, 5x_1 + 7x_2, x_1 + 3x_2)$$
+
+$$A = \begin{bmatrix}
+	T(\vec{e}_1) & T(\vec{e}_2)
+\end{bmatrix}$$
+\begin{align*}
+	T(e_1) &= T(1, 0) = \begin{bmatrix}
+		3\\5\\1
+	\end{bmatrix}\\
+	T(e_2) &= T(0, 1) = \begin{bmatrix}
+		1\\7\\3
+	\end{bmatrix}
+\end{align*} 
+$$A = \begin{bmatrix}
+		3 & 1\\
+		5 & 7\\
+		1 & 3\\
+	\end{bmatrix}$$
+
+Because there are more columns than rows, it cannot be onto.
+Because the two columns are not multiples of each other by inspection, the columns are linearly independent so the matrix is one-to-one.
 \end{document}
