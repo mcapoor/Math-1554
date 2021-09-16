@@ -769,7 +769,8 @@ $$T(c_1 \vec{v}_1 + ... + c_k \vec{v}_k) = c_1 T(\vec{v}_1 + ... + c_k T(\vec{v}
 \textbf{Every matrix transformation $T_A$ is linear.}
 
 \subsubsection{Matrix Transformations}
-A matrix transformation (a mapping where $\forall \mathbf{x} \in \R^n, T(x) =  A\mathbf{x} \quad (A \in \R^{m \times n})$) can be written as $\mathbf{x} \mapsto A\mathbf{x}$
+A matrix transformation (a mapping where $\forall \mathbf{x} \in \R^n, T(x) =  A\mathbf{x} \quad (A \in \R^{m \times n})$) can be written as $\mathbf{x} \mapsto A\mathbf{x}$\\
+Similarly, every matrix transform is completely determined by what it does to the columns of the $n\times n$ identity matrix.
 
 Geometric interpretations of transforms in $\R^2$:
 \begin{enumerate}
@@ -908,18 +909,53 @@ $$T(x) = \begin{bmatrix}
 	0 & 1\\
 \end{bmatrix}$$
 
- \emph{Onto transform:} a transform for which $A\vec{x} = \vec{b}$
- \quad - This is an existence property, for any $\vec{b} \in \R^m, A\vec{x} = \vec{b}$ has a solution
+ \emph{Onto transform:} a transform for which $A\vec{x} = \vec{b}$\\
+ \quad - This is an existence property, for any $\vec{b} \in \R^m, A\vec{x} = \vec{b}$ has a solution\\
  \quad - T is onto iff its standard matrix has a pivot in every row
 
- \emph{One-to-one transform:} a transform for which there is at most one solution to $ A\vec{x} = \vec{b}$
- \quad - This uniqueness property does not assert existence for all $\vec{b}$
- \quad - T is one-to-one iff the only solution to $T(\vec{x}) = \vec{0}$ is $\vec{x} = \vec{0}$
- \quad - T is one-to-one iff every column of A is pivotal
+ \emph{One-to-one transform:} a transform for which there is at most one solution to $ A\vec{x} = \vec{b}$\\
+ \quad - This uniqueness property does not assert existence for all $\vec{b}$\\
+ \quad - T is one-to-one iff the only solution to $T(\vec{x}) = \vec{0}$ is $\vec{x} = \vec{0}$\\
+ \quad - T is one-to-one iff every column of A is pivotal\\
 
  Onto means that the columns of A span $\R^n$
 
  One-to-one means that the only solution is the trivial one and A has linearly independent columns
+
+\subsubsection{Determining the image of a transform}
+Example: Suppose T is a transform $T: \R^2 \mapsto \R^3$ such that 
+$$T(\vec{e}_1) = \begin{bmatrix}
+	5\\
+	-7\\
+	2
+\end{bmatrix} \quad T(\vec{e}_2) = \begin{bmatrix}
+	-3\\
+	8\\
+	0\\
+\end{bmatrix}$$
+
+As any matrix can be written as a linear combination
+$$\vec{x} = \begin{bmatrix}
+	x_1 \\ x_2
+\end{bmatrix} = x_1 \begin{bmatrix}
+	1 \\ 0
+\end{bmatrix} + x_2 \begin{bmatrix}
+	0 \\ 1
+\end{bmatrix} = x_1 \vec{e}_1 + x_2 \vec{e}_2$$
+
+And since T is a linear transformation
+\begin{align*}
+	T(\vec{x}) &= x_1 T(\vec{e}_1) + x_2 T(\vec{e}_2)\\
+	&= x_1 \begin{bmatrix}
+		5\\-7\\2
+	\end{bmatrix} + x_2\begin{bmatrix}
+		-3\\8\\0
+	\end{bmatrix} = \begin{bmatrix}
+		5x_1 - 3x_2\\
+		-7x_1 + 8x_2\\
+		2x_1 + 0\\
+	\end{bmatrix}
+\end{align*}
 
 \subsubsection{Example: Constructing a standard matrix}
 Define a linear transformation by
@@ -944,4 +980,165 @@ $$A = \begin{bmatrix}
 
 Because there are more columns than rows, it cannot be onto.
 Because the two columns are not multiples of each other by inspection, the columns are linearly independent so the matrix is one-to-one.
+
+
+%--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+\section{Module 2: Matrix Algebra}
+\subsection{TOPIC 1: Matrix Operations}
+\emph{Main diagonal:} the diagonal entries $a_{11}, a_{22}, a_{33}, ...$ of $A=[a_{ij}], \quad A\in \R^{m\times n}$
+
+\emph{Diagonal matrix:} a square matrix $n \times n$ whose nondiagonal entries are zero (e.g. $I_n$)
+
+\emph{Zero matrix:} a matrix whose entries are all zero, written $0$
+
+\emph{Equal:} property of two matrices of the same size with corresponding entries equal
+
+Properties of Matrix addition:
+\begin{enumerate}
+	\item $A + B = B + A$
+	\item $(A + B) + C = A + (B + C)$
+	\item $A + 0 = A$
+	\item $r(A + B) = rA + rB$
+	\item $(r + s)A = rA + sB$
+	\item $r(sA) = (rs)A$
+\end{enumerate}
+
+If a matrix $B$ multiplies a vector $\mathbf{x}$, it is a transform $B\mathbf{x}$. If this vector is then multiplied by $A$, the composite transformed vector is $A(Bx)$. Thus:
+$$A(Bx) = (AB)x$$
+
+$$AB = A\begin{bmatrix}
+	\mathbf{b}_1 & \mathbf{b}_2 & ... & \mathbf{b}_p
+\end{bmatrix} = \begin{bmatrix}
+	A\mathbf{b}_1 & A\mathbf{b}_2 & ... &A\mathbf{b}_p
+\end{bmatrix}$$
+
+Multiplication of matrices corresponds to composition of linear transformations.
+
+Row column rule for matrix multiplication:
+If $A \in \R^{m \times n}$ has rows $\vec{a}_i$, and $B \in \R^{n\times p}$ has columns $\vec{b}_j$, each element of the product $C = AB$ is the dot product $c_{ij} = \vec{a}_i \cdot \vec{b}_j$
+
+Each column of AB is a linear combination of the columns of A using weights from the corresponding column of B. 
+
+\textbf{The number of columns of A must match the number of rows in B in order for a linear combination such as $A\mathbf{b}_1$ to be defined.}
+
+Properties of Matrix multiplication:
+\begin{enumerate}
+	\item $A(BC) = (AB)C$
+	\item $A(B + C) = AB + AC$
+	\item $(B + C)A = BA + CA$
+	\item $r(AB) = (rA)B = A(rB)$
+	\item $I_mA = A = AI_n$
+	\item If $AB = AC$ it is usually NOT true that $B = C$
+	\item If $AB$ is the zero matrix, you CANNOT conclude that either $A = $  or $B = 0$
+\end{enumerate}
+
+If $A \neq 0$ and $\mathbf{x} \in \R^n$, then $A^k\mathbf{x}$ is the result of left-multiplying \textbf{x} by A repeatedly k times. ($A^0 = I_n$)
+
+\emph{Transpose:} the transpose of an $m \times n$ matrix A is the $n \times m$ matrix $A^T$ whose columns are the corresponding rows of A.
+$$A = \begin{bmatrix}
+	a & b\\
+	c & d
+\end{bmatrix} \quad A^T = \begin{bmatrix}
+	a & c\\
+	b & d
+\end{bmatrix}$$
+
+Transposition properties:
+\begin{enumerate}
+	\item $(A^T)^T = A$
+	\item $(A + B)^T = A^T + B^T$
+	\item $(rA)^T = rA^T$
+	\item $(AB)^T = B^TA^T$
+\end{enumerate}
+
+Hence, \textit{the transpose of a product of matrices equals the product of their transposes in the reverse order.}
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{TOPIC 2: The Inverse of a Matrix}
+\emph{Invertible:} a square matric is invertible if there is a matrix $C \in \R^{n \times n}$ such that 
+$$CA = I \quad \text{and} \quad AC = I$$
+Here, C is the unique inverse of A often denoted $A^-1$
+
+\emph{Singular matrix:} a noninvertible matrix 
+
+\emph{Nonsingular matrix:} an invertible matrix
+
+\subsubsection{Finding the inverse}
+$$A = \begin{bmatrix}
+	a & b\\
+	c & d\\
+\end{bmatrix}$$
+If $ad - bc \neq 0$, then A is invertible and 
+$$A^{-1} = \frac{1}{ad - bc}\begin{bmatrix}
+	d & -b\\
+	-c & a
+\end{bmatrix}$$
+
+\emph{Determinant:} $\det A = ad - bc$. If $\det A = 0$, A is not invertible. 
+
+\textbf{If A is an invertible $n \times n$ matrix, then for each $\vec{b}$ in $\R^n$, the equation $Ax = \vec{b}$ has the unique solution $\vec{x} = A^{-1}\vec{b}$}
+
+While the equation above can used to solve an equation $Ax = b$, row reduction of $\begin{bmatrix}
+	A & \mathbf{b}
+\end{bmatrix}$ is almost always faster.
+
+Properties of invertible matrices:
+\begin{enumerate}
+	\item $(A^-1)-1 = A$
+	\item $(AB)^-1 = B^-1A^-1$
+	\item $(A^T)^-1 = (A^-1)^T$
+\end{enumerate}
+
+\emph{Elementary matrix:} a matric that is obtained by performing a single elementary row operation on an identity matrix.
+
+If an elementary row operation is performed on an $m \times n$ matrix A, the resulting matrix can be written as $EA$, where the $m \times m$ matrix $E$ is created by performing the same row operation on $I_m$.
+
+\textbf{Every elementary matrix is invertible and square} where the inverse of E is the elementary matrix that trasforms E back into I.
+
+\emph{An $n \times n$ matrix is invertible iff A is row equivalent to $I_n$, in which case any sequence of elemenary row operations which maps $A \mapsto I_n$ also transforms $I_n \mapsto A^{-1}$}
+
+$A$ has an inverse iff for all $\vec{b} \in \R^n$, $Ax=b$ has a unique solution
+
+\subsubsection{To find $A^{-1}$:}
+Row reduce the augmented matrix $\begin{bmatrix}
+	A & I
+\end{bmatrix}$ If A is row equivalent to I, then $\begin{bmatrix}
+	A & I
+\end{bmatrix}$ is row equivalent to $\begin{bmatrix}
+	I & A^{-1}
+\end{bmatrix}$
+
+Example: 
+Find the inverse of $A = \begin{bmatrix}
+	0 & 1 & 2\\
+	1 & 0 & 3\\
+	4 & -3 & 8
+\end{bmatrix}$
+
+Solution:
+$$\begin{bmatrix}
+	A & I
+\end{bmatrix} = \begin{bmatrix}
+	0 & 1 & 2 & 1 & 0 & 0\\
+	1 & 0 & 3 & 0 & 1 & 0\\
+	4 & -3 & 8 & 0 & 0 & 1
+\end{bmatrix} \sim \begin{bmatrix}
+	1 & 0 & 0 & -\frac{9}{2} & 7 & -\frac{3}{2}\\
+	0 & 1 & 0 & -2 & 4 & -1\\
+	0 & 0 & 1 & \frac{3}{2} & -2 & \frac{1}{2}
+\end{bmatrix}$$
+Since $A \sim I$, A is invertible and 
+$$A^{-1} = \begin{bmatrix}
+	-\frac{9}{2} & 7 & -\frac{3}{2}\\
+	-2 & 4 & -1\\
+	\frac{3}{2} & -2 & \frac{1}{2}
+\end{bmatrix}$$
+
+Row reduction of $\begin{bmatrix}
+	A & I
+\end{bmatrix}$ to $\begin{bmatrix}
+	I & A^{-1}
+\end{bmatrix}$ can be viewed as the simultaneous solution of the n systems 
+$$A\mathbf{x} = \mathbf{e_1}, \quad A\mathbf{x} = \mathbf{e_2}, \quad ..., \quad A\mathbf{x} = \mathbf{e_n}$$ 
 \end{document}
