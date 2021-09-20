@@ -214,6 +214,7 @@ These questions can often be answered from the triangular form of the matrix (in
 If this method creates contradictions, however, such as in the system $\begin{bmatrix}a & b & c & d\\ e & f & g & h\\0 & 0 & 0 & 1\\ \end{bmatrix}$, then the originial system is inconsistent. \\
 
 %----------------------------------------------------------------------------------------------------------------------------------------%
+\pagebreak
 \subsection{TOPIC 2: Row Reduction and Echelon Forms}
 \emph{Nonzero:} any row or column which contains at least one nonzero entry\\
 
@@ -371,6 +372,7 @@ When a system is in echelon form and contains no equation of the form $0 = b (b 
 
 
 %----------------------------------------------------------------------------------------------------------------------------------------%
+\pagebreak
 \subsection{TOPIC 3: Vector Equations}
 \emph{Column vector:} a matrix with only one column
 $$\mathbf{w}= \begin{bmatrix}w_1 \\ w_2 \end{bmatrix}$$
@@ -482,6 +484,7 @@ This suggests that $0 = -2$ but as this is not possible, the matrix is inconsist
 
 
 %----------------------------------------------------------------------------------------------------------------------------------------%
+\pagebreak
 \subsection{TOPIC 4: The Matrix Equation}
 \begin{itemize}
 \item $\in$: \indent belongs to \\
@@ -585,6 +588,7 @@ $$\begin{bmatrix}
 \emph{The identity matrix:} denoted $\mathbf{I}$, this $n\times n$ matrix contains 1's on the diagonal and 0's elsewhere, creating the universal property that $\mathbf{I_n x} = \mathbf{x} \text{  for every  } \mathbf{x} \in \R^n$
 
 %----------------------------------------------------------------------------------------------------------------------------------------%
+\pagebreak
 \subsection{TOPIC 5: Solution sets of Linear Systems}
 \emph{Homogenous:} characteristic of linear systems of the form \mateq, $\vec{b} = \vec{0}$\\
 
@@ -680,7 +684,7 @@ By replacing $x_3$ with a general parameter $t \in \R$, we have a universal solu
 \subsubsection{Theorem:}
 Suppose the equation $Ax=b$ is consistent for some given \textbf{b} and let \textbf{p} be a solution. The solution set of $Ax =b$ is the set of all vectors of the form $\mathbf{w} = \mathbf{p} + \mathbf{v}_h$ where $\mathbf{v}_h$ is any solution of the homogenous equation $Ax=b$
 %----------------------------------------------------------------------------------------------------------------------------------------%
-
+\pagebreak
 \subsection{TOPIC 6: Linear Independence}
 A set of vectors {$\vec{v_1}, ..., \vec{v_k}$} $\in \R^n$ are linearly independent if $\sum_{n=1}^k = c_k \vec{v_k} = 0$ has only the trivial solution ($\vec{c} = \vec{0}$). It is linearly dependent otherwise. 
 
@@ -735,7 +739,7 @@ $$h \neq \{-2, 1\}$$
 \end{enumerate}
 
 %----------------------------------------------------------------------------------------------------------------------------------------%
-
+\pagebreak
 \subsection{TOPIC 7: Introduction to Linear Transformations}
 Instead of as a linear combination of variables, matrices can also be viewed as a \emph{function} from one set of vectors to another. Thus, solving the equation $Ax=b$ amounts to finding all vectors \textbf{x} in $\R^4$ that are transformed into the vector \textbf{b} in $\R^2$ under the "action" of multiplication by $A$.\\ 
 
@@ -983,6 +987,7 @@ Because the two columns are not multiples of each other by inspection, the colum
 
 
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+\pagebreak
 \section{Module 2: Matrix Algebra}
 \subsection{TOPIC 1: Matrix Operations}
 \emph{Main diagonal:} the diagonal entries $a_{11}, a_{22}, a_{33}, ...$ of $A=[a_{ij}], \quad A\in \R^{m\times n}$
@@ -1054,7 +1059,7 @@ Transposition properties:
 Hence, \textit{the transpose of a product of matrices equals the product of their transposes in the reverse order.}
 
 %----------------------------------------------------------------------------------------------------------------------------------------%
-
+\pagebreak
 \subsection{TOPIC 2: The Inverse of a Matrix}
 \emph{Invertible:} a square matric is invertible if there is a matrix $C \in \R^{n \times n}$ such that 
 $$CA = I \quad \text{and} \quad AC = I$$
@@ -1140,5 +1145,259 @@ Row reduction of $\begin{bmatrix}
 \end{bmatrix}$ to $\begin{bmatrix}
 	I & A^{-1}
 \end{bmatrix}$ can be viewed as the simultaneous solution of the n systems 
-$$A\mathbf{x} = \mathbf{e_1}, \quad A\mathbf{x} = \mathbf{e_2}, \quad ..., \quad A\mathbf{x} = \mathbf{e_n}$$ 
+$$A\mathbf{x} = \mathbf{e_1}, \quad A\mathbf{x} = \mathbf{e_2}, \quad ..., \quad A\mathbf{x} = \mathbf{e_n}$$
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+\pagebreak
+\subsection{TOPIC 3: Characterisations of Invertible Matrices}
+
+\emph{Invertible matrix theorem:} for a given square matrix A, the following are all true or all false:
+\begin{enumerate}
+	\item A is an invertible matrix
+	\item A is row equivalent to $I_n$
+	\item A has n pivot positions
+	\item The equation $Ax = 0$ has only the trivial solution
+	\item THe columns of A form a linearly independent set
+	\item The linear transformation $x \mapsto Ax$ is one-to-one
+	\item The equation $Ax = b$ has at least one solution for each $\mathbf{b} \in \R^n$
+	\item The columns of A span $\R^n$
+	\item The linear transformation $x \mapsto Ax$ maps $\R^n$ onto $\R^n$
+	\item There is an $n \times n$ matrix C such that $CA = I$
+	\item There is an $n \times n$ matrix D such that $AD = I$ 
+	\item $A^T$ is an invertible matrix
+\end{enumerate}
+
+If $A$ and $B$ are two square matrices and $AB = I$, then both $A$ and $B$ are invertible with $B = A^{-1}$ and $B^{-1}$
+
+\emph{Invertible linear transformation}: a transform is invertible if there exists a function $S: \R^n \to \R^n$ such that 
+\begin{align}
+	S(T(x)) &= x \quad \forall x \in \R^n\\
+	T(S(x)) &= x \quad \forall x \in \R^n\\
+\end{align}
+If such S exists, it is unique and must be a linear transform. This transform is invertible iff its standard matrix A is nonsingular. In that case, $S(x) = A^{-1}x$ is the unique function satisfying (1) and (2).
+
+\emph{Ill-conditioned matrix:} an invertible matrix that can become singular if some of its entries are changed just slightly. This becomes dangerous if roundoff error makes a nonsingular matrix appear invertible.
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+\pagebreak
+\subsection{TOPIC 4: Partitioned Matrices}
+\emph{Partitioned matrix:} a matrix whose entries are meant to be considered differently than a list of column vectors based on the system it represents. 
+For example, the matrix 
+$$A = \left[ \begin{array}{ccc|cc|c}
+	3 & 0 & -1  & 5 & 9 & -2\\
+	-5 & 2 & 4 & 0 & -2 & 1\\
+	\hline
+	-8 & -6 & 3 & 1 & 7 & -4\\	
+\end{array} \right]$$
+can also be the $2 \times 3$ partitioned matrix 
+$$A = \begin{bmatrix}
+	A_{11} & A_{12} & A_{13}\\
+	A_{21} & A_{22} & A_{23}
+\end{bmatrix}$$
+whose entries are the blocks (submatrices)
+\begin{align*}
+	A_{11} &= \begin{bmatrix}
+		3 & 0 & -1\\
+		-5 & 2 & 4
+	\end{bmatrix}, & A_{12} &= \begin{bmatrix}
+		5 & 9\\
+		0 & -3
+	\end{bmatrix}, & A_{13} &= \begin{bmatrix}
+		-2\\
+		1
+	\end{bmatrix}\\
+	A_{21} &= \begin{bmatrix}
+		-8 & -6 & 3
+	\end{bmatrix}, & A_{22} &= \begin{bmatrix}
+		1 & 7
+	\end{bmatrix}, & A_{23} &= \begin{bmatrix}
+		-4
+	\end{bmatrix}
+\end{align*}
+
+Assuming the blocks of two partitioned matrices are the same size, addition between them is defined as the block-by-block sum of corresponding partitions. Similarly, multiplication by a scalar is performed piecewise. 
+
+Partitioned matrices can be multiplied by the usual row-column rule as if the block entires were scalars, provided that for a product AB, the column partition of A matches the row partition of B. 
+
+\emph{Conformable:} property of two matrices that are partitioned the same way
+
+\emph{Block diagonal matrix:} a paritioned matrix with zero blocks off the main diagonals 
+\quad - such a matrix is invertible iff each block on the diagonal is invertible
+
+Paritioned matrices are especially useful in numerical slutions of especially large systems where partitioning can make more efficient use of system resources
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{TOPIC 5: MATRIX FACTORISATIONS}
+\emph{Factorization:} an equation that expresses a matrix A as a product of two or more matrices. 
+
+Whereas multiplication was a synthesis of data, factorisation is an analysis.
+
+\subsubsection{LU Factorisation}
+This is a more efficient process for solving the system
+$$Ax = b_1, \quad Ax= b_2, \quad ..., \quad Ax = b_p$$
+
+The method:
+\begin{enumerate}
+	\item Assume A is an $m \times n$ matrix that can be row reduced to echelon form without row interchanges
+	\item A can be written in the form $A = LU$ where L is an $m \times n$ lower triangular matrix with 1's on the diagonal and U is an $m \times n$ echelon form of A
+	$$A = LU = \begin{bmatrix}
+		1 & 0 & 0 & 0\\
+		* & 1 & 0 & 0\\
+		* & * & 1 & 0\\
+		* & * & * & 1\\
+	\end{bmatrix} \begin{bmatrix}
+		\blacksquare & * & * & * & *\\
+		0 & \blacksquare & * & * & *\\
+		0 & 0 & 0 & \blacksquare & *\\
+		0 & 0 & 0 & 0 & 0\\
+	\end{bmatrix}$$
+	\item When $A = LU, Ax = b$ can be written as $L(Ux) = b$
+	\item We can then find x by solving the pair of equations
+		\begin{align*}
+			Ly &= b\\
+			Ux &= y
+		\end{align*}
+	\item First solve for y, then for x. Because L and U are triangular, both equations are easy to solve. 
+\end{enumerate}
+
+Example:
+Given 
+$$A = \begin{bmatrix}
+	3 & -7 & -2 & 2\\
+	-3 & 5 & 1 & 0\\
+	6 & -4 & - & -5\\
+	-9 & 5 & -5 & 12
+\end{bmatrix} = \begin{bmatrix}
+	1 & 0 & 0 & 0\\
+	-1 & 1 & 0 & 0\\
+	2 & -5 & 1 & 1\\
+	-3 & 8 & 3 & 1
+\end{bmatrix} \begin{bmatrix}
+	3 & -7 & -2 & 2\\
+	0 & -2 & -1 & 2\\
+	0 & 0 & -1 & -1\\
+	0 & 0 & 0 & -1
+\end{bmatrix} = LU$$
+use this LU factorisation to solve $Ax = b$, where $b = \begin{bmatrix}
+	-9\\
+	5\\
+	7\\
+	11
+\end{bmatrix}$
+
+Solution:
+$$\begin{bmatrix}
+	L & b
+\end{bmatrix} = \begin{bmatrix}
+	1 & 0 & 0 & 0 & -9\\
+	-1 & 1 & 0 & 0 & 5\\
+	2 & -5 & 1 & 1 & 7\\
+	-3 & 8 & 3 & 1 & 11
+\end{bmatrix} \sim \begin{bmatrix}
+	1 & 0 & 0 & 0 & -9\\
+	0 & 1 & 0 & 0 & -4\\
+	0 & 0 & 1 & 0 & 5\\
+	0 & 0 & 0 & 1 & 1
+\end{bmatrix} = \begin{bmatrix}
+	I & y
+\end{bmatrix}$$
+Then, 
+$$\begin{bmatrix}
+	U & y
+\end{bmatrix} = \begin{bmatrix}
+	3 & -7 & -2 & 2 & -9\\
+	0 & -2 & -1 & 2 & -4\\
+	0 & 0 & -1 & -1 & 5\\
+	0 & 0 & 0 & -1 & 1
+\end{bmatrix} \sim \begin{bmatrix}
+	1 & 0 & 0 & 0 & 3\\
+	0 & 1 & 0 & 0 & 4\\
+	0 & 0 & 1 & 0 & -6\\
+	0 & 0 & 0 & 1 & -1
+\end{bmatrix}$$
+In this method, finding x requires 28 arithmetic operations. Meanwhile, row reduction of $\left[A \quad b\right]$ to  $\left[I \quad x\right]$ takes 62 operations.
+
+\subsubsection{An LU factorisation algorithm}
+Suppose A can be reduced to an echelon form U using only row replacements that add a multiple of one row to another row \emph{below it}. In this case, there exist unit lower triangular elementary matrices such that 
+$$E_p ... E_1A = U$$
+Then 
+$$A = (E_p ... E_1)^{-1}U = LU$$
+where 
+$$L = (E_p ... E_1)^{-1}$$
+It can be shown that the row operations which reduce A to U also reduce L to I, because $E_p...E_1L=(E_p...E_1)(E_p...E_1)^{-1} = I$
+
+In summary:
+\begin{enumerate}
+	\item Reduce A to an echelon form U by a sequence of row replacement operations, if possible.
+	\item Place entries in L such that the same sequence of row operations reduces L to I. 
+\end{enumerate}
+
+Example:
+Find an LU factorization of 
+$$A = \begin{bmatrix}
+	2 & 4 & -1 & 5 & -2\\
+	-4 & -5 & 3 & -8 & 1\\
+	2 & -5 & -4 & 1 & 8\\
+	-6 & 0 & 7 & -3 & 1
+\end{bmatrix}$$
+
+
+Solution: 
+Since A has four rows, L should be $4 \times 4$. The first column of L is the first column of A divided by the top pivot entry
+$$L = \begin{bmatrix}
+	1 & 0 & 0 & 0\\
+	-2 & 1 & 0 & 0\\
+	1 & & 1 & 0\\
+	-3 & & & 1\\
+\end{bmatrix}$$
+
+Next row reduce A to its echelon form U:
+\begin{align*}
+	A &= \begin{bmatrix}
+		2 & 4 & -1 & 5 & -2\\
+		-4 & -5 & 3 & -8 & 1\\
+		2 & -5 & -4 & 1 & 8\\
+		-6 & 0 & 7 & -3 & 1
+	\end{bmatrix} \sim \begin{bmatrix}
+		2 & 4 & -1 & 5 & -2\\
+		0 & 3 & 1 & 2 & -3\\
+		0 & -9 & -3 & -4 & 10\\
+		0 & 12 & 4 & 12 & -5
+	\end{bmatrix} \sim \begin{bmatrix}
+		2 & 4 & -1 & 5 & -2\\
+		0 & 3 & 1 & 2 & -3\\
+		0 & 0 & 0 & 2 & 1\\
+		0 & 0 & 0 & 4 & 7
+	\end{bmatrix}\\ 
+	&\sim \begin{bmatrix}
+		2 & 4 & -1 & 5 & -2\\
+		0 & 3 & 1 & 2 & -3\\
+		0 & 0 & 0 & 2 & 1\\
+		0 & 0 & 0 & 4 & 7
+	\end{bmatrix} \sim \begin{bmatrix}
+		2 & 4 & -1 & 5 & -2\\
+		0 & 3 & 1 & 2 & -3\\
+		0 & 0 & 0 & 2 & 1\\
+		0 & 0 & 0 & 0 & 5
+	\end{bmatrix} = U
+\end{align*}
+
+The columns eliminated in each step of the row reduction process divided by the pivot form L:
+$$\begin{bmatrix}
+	2 & & & \\
+	-4 & 3 & & \\
+	2 & -9 & 2 & \\
+	-6 & 12 & 4 & 5
+\end{bmatrix} \implies L = \begin{bmatrix}
+	1 & 0 & 0 & 0\\
+	-2 & 1 & 0 & 0\\
+	1 & -3 & 1 & 0\\
+	-3 & 4 & 2 & 1\\
+\end{bmatrix}$$
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{TOPIC 6: The Leontief Input-Output Model}
+
 \end{document}
