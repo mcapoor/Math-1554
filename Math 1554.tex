@@ -59,6 +59,8 @@
 %%% The "real" document content comes below...
 \pagenumbering{arabic}
 
+\graphicspath{{./images/}}
+
 \title{Math 1554}
 \author{Milan Capoor}
 \date{Fall 2021} % Activate to display a given date or no date (if empty),
@@ -1399,5 +1401,133 @@ $$\begin{bmatrix}
 %----------------------------------------------------------------------------------------------------------------------------------------%
 
 \subsection{TOPIC 6: The Leontief Input-Output Model}
+The interactions between sectors can be represented by the matrix equation
+$$(I - C)x = d$$
+Where:
+$I$ is the identity matrix
+$C$ is a coefficient matrix representing the demand of each sector for goods from each other sector
+$\mathbf{x}$ is a unit consumption vector describing the number of units  of output which are routed to each sector based on the consumption matrix 
+$\mathbf{d}$ is the final demand vector (the output of the system after accounting for intermediate demand, $Cx$)
 
+If $C$ and $\mathbf{d}$ have nonnegative entries and if each column sum of $C$ is less than 1, 
+$$\mathbf{x} = (I - C)^{-1} \mathbf{d}$$
+and
+$$(I - C)^{-1} \approxeq I + C + C^2 + ... C^m$$
+which, in most real-world circumstances, will have powers of the consumption matrix approach 0 quite quickly.
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{TOPIC 7: Computer Graphics}
+
+Often computer graphics will be represented by a list of points which can be connected by straight lines. 
+
+\subsubsection{2D Graphics}
+A particular graphic, for example the letter "N" can be stored as coordinates in a data Matrix
+$$D = \begin{bmatrix}
+	x\\y
+\end{bmatrix} = \begin{bmatrix}
+	0 & 0.5 & 0.5 & 6 & 6 & 5.5 & 5.5 & 0\\
+	0 & 0 & 6.42 & 0 & 8 & 8 & 1.58 & 8
+\end{bmatrix}$$
+
+This represetation makes the transformation or animation of pictures very easy: the resultant figure is described by the matrix product $AD$ where A is any linear transformation.
+
+Unfortunately, translation is not a linear transform so cannot be represented by matrix multiplication. 
+
+\emph{Homogeneous coordinates:} corresponding sets of coordinates where $\forall x, y \in \R^2, (x, y) \mapsto (x, y, 1) \in \R^3$
+For example, (0, 0) has homogenous coordinates (0, 0, 1). These coordinates are not multiplied or added by scalars but can be transformed via multiplication by $3 \times 3$ matrices. 
+
+With homogeneous coordinates we are able to represent translations:
+$$(x, y) \mapsto (x + h, y + k) \implies (x, y, 1) \mapsto (x + h, y + k, 1)$$
+Thus, 
+$$\begin{bmatrix}
+	1 & 0 & h\\
+	0 & 1 & k\\
+	0 & 0 & 1
+\end{bmatrix} \begin{bmatrix}
+	x\\
+	y\\
+	1
+\end{bmatrix} = \begin{bmatrix}
+	x + h\\
+	y + k\\
+	1
+\end{bmatrix}$$
+
+More broadly, any linear transformation in $\R^2$ can be represented in homogeneous coordinates by a paritioned matrix of the form $\begin{bmatrix}
+	A & 0\\
+	0 & 1
+\end{bmatrix}$ where $A$ is a $2 \times 2$ standard matrix.
+
+\subsubsection{3D Graphics}
+Homogeneous coordinates for the point (x, y, z) can usually be expressed as (X, Y, Z, H) where 
+$$x = \frac{X}{H}, \quad y = \frac{Y}{H}, \quad z = \frac{Z}{H}$$
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{TOPIC 8: Subspaces of $\R^n$}
+\emph{Subspace:} any set H in $\R^n$ that has the properties:
+\begin{itemize}
+	\item The zero vector is in H
+	\item $\forall \mathbf{u}, \mathbf{v} \in H \quad \mathbf{u + v} \in H$
+	\item $\forall \mathbf{u} \in H, \quad c\mathbf{u} \in H$
+\end{itemize}
+
+A subspace is closed under addition and scalar multiplication. 
+
+One of the most common ways of visualising a subspace is a plane through the origin. 
+
+Example: If $\mathbf{v}_1, \mathbf{v}_2 \in \R^n$ and $H = \text{Span}\{\mathbf{v}_1, \mathbf{v}_2\}$, then H is a subspace of $\R^n$
+
+\emph{Column space:} the subspace of a matrix A is the set Col A of all linear combinations of the columns of A
+
+Col A equals $\R^m$ only when the columns of A span $\R^m$. Otherwise, Col A is only part of $\R^m$
+
+A vector b is in Col A iff the equation Ax = b has a solution. 
+
+\emph{Null space:} the null space of a matrix A is the set Nul A of all solutions of the homogeneous equation Ax = 0
+
+The null space of an $m \times n$ matrix A is a subspace of $\R^n$. Equivalently, the set of all solutions of a system $Ax = 0$ of m homogeneous linear equations in n unknowns is a subspace of $\R^n$. 
+
+\emph{Basis:} for a subspace H of $\R^n$, the basis is a linearly independent set in H that spans H
+
+\emph{Standard basis:} the set $\{\mathbf{e}_1, ..., \mathbf{e}_2\}$
+
+The pivot columns of a matrix A form a basis for the column space of A.
+Note: the columns of an echelon form B are often not in the column space of A
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{TOPIC 9: Dimension and Rank}
+The main reason for a selecting a basis for a subspace H rather than just a spanning set is that each vector in H can bbe written in only one way as a linear combination of the basis vectors.
+
+\emph{Coordinate vector:} for each x in a subspace H, 
+$$[x]_\mathfrak{B} = \begin{bmatrix}
+	c_1\\ \vdots \\ c_p
+\end{bmatrix}$$
+for $c_1, ... c_p$ such that 
+$$x = c_1 \mathbf{b}_1 + ... + c_p \mathbf{b}_p$$
+
+\emph{Isomorphism:} a correspondence $x \mapsto [x]_\mathfrak{B}$ which is a one-to-one mapping which preserves linear combinations.
+
+\emph{Dimension:} the dimensions of a nonzero subspace H, denoted dim H, is the number of vectors in any bassis for H
+
+The space $\R^n$ has dimension n so every basis for $\R^n$ consists of n vectors. Similarly, a plane through \textbf{0} is two-dimensional while a line through \textbf{0} is one-dimensional. 
+
+\emph{Rank:} the rank of a matrix A, denoted rank A, is the dimension of the column space of A
+
+Since the pivot columns of A form a basis for Col A, the rank of A is just the number of pivot columns in A.
+
+\emph{The Rank Theorem:} If a matrix A has n columns, then rank A + dim Nul A = n
+
+\emph{The Basis Theorem:} Any linearly independent set of exactly p elements in a p-dimensional subspace of $\R^n$ H is automatically a basis for H.
+
+\subsubsection{Extension of the Invertible Matrix Theorem}
+For an $n \times n$ matrix A, the following statements are equivalent to the statement that A is nonsingular:
+\begin{enumerate}
+	\item The columns of A form a basis of $\R^n$
+	\item Col A = $\R^n$
+	\item dim Col A = n
+	\item rank A = n
+	\item Nul A = \{\textbf{0}\}
+	\item dim Nul A = 0
+\end{enumerate}
 \end{document}
