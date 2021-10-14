@@ -71,49 +71,48 @@
 
 \section{Module 1: Linear Equations}
 \subsection{TOPIC 1: Systems of Linear Equations}
-\emph{Linear equation:} an equation in the form $a_1 x_1 + a_2 x_2 + ... + a_n x_n = b$ where $a_n$ and $b$ are real or complex coefficients of the variables $x_n$\\
+\emph{Linear equation:} an equation in the form $a_1 x_1 + a_2 x_2 + ... + a_n x_n = b$ where $a_n$ and $b$ are real or complex coefficients of the variables $x_n$
 
-\emph{Linear system (system of linear equations):} a collection of linear equations involving the same variables\\
+\emph{Linear system (system of linear equations):} a collection of linear equations involving the same variables
 
 \emph{Solution:} a list of values ($s_1, s_2, ..., s_n$) for which substitution into the variables 
-($x_1, x_2, ... , x_n$) makes the equations true\\
-\indent - Found where the equations’ lines intersect \\
+($x_1, x_2, ... , x_n$) makes the equations true
+\indent - Found where the equations’ lines intersect 
 
-\emph{Solution set:} the collection of all solutions to a linear system\\
+\emph{Solution set:} the collection of all solutions to a linear system
 
-\emph{Equivalent:} characteristic of two linear systems if they have the same solution sets\\
+\emph{Equivalent:} characteristic of two linear systems if they have the same solution sets
 
-\emph{Consistent system:} a linear system which has infinitely many solutions or one solution\\
-\indent - Happens when the lines intersect at a single point or when the lines coincide\\
+\emph{Consistent system:} a linear system which has infinitely many solutions or one solution
+\indent - Happens when the lines intersect at a single point or when the lines coincide
 
-\emph{Inconsistent system:} system with no solutions\\
-\indent - When the lines are parallel\\
+\emph{Inconsistent system:} system with no solutions
+\indent - When the lines are parallel
 
 
 
-\emph{Matrix:} the essential information of a linear system can be recorded compactly in a rectangular array\\
+\emph{Matrix:} the essential information of a linear system can be recorded compactly in a rectangular array
+
 Given the system
 \begin{align*}
 x_1 - 2x_2 + x_3 &= 0\\
 \;	2x_2 - 8x_3 &= 8\\
 5x_1\; 	- 5x_3 &= 10\\
 \end{align*}
+
 The \emph{coefficient matrix}
-\begin{center}
-	$\begin{bmatrix}
+$$\begin{bmatrix}
 		1 & -2 & 1\\ 
 		0 & 2 & -8 \\
 		5 & 0 & -5\\
-	\end{bmatrix}$
-\end{center}
-encodes the essential information of the system while the \emph{augmented matrix} is \\
-\begin{center}
-	$\begin{bmatrix}
-		1 & -2 & 1 & 0\\ 
-		0 & 2 & -8 & 8\\
-		5 & 0 & -5 & 10\\
-	 \end{bmatrix}$
-\end{center}
+	\end{bmatrix}$$
+
+encodes the essential information of the system while the \emph{augmented matrix} is 
+$$\begin{bmatrix}
+	1 & -2 & 1 & 0\\ 
+	0 & 2 & -8 & 8\\
+	5 & 0 & -5 & 10\\
+	\end{bmatrix}$$
 
 An $m \times n$ matrix is a rectangular array of numbers with $m$ rows and $n$ columns.
 
@@ -135,62 +134,54 @@ The basic strategy is to \emph{replace one system with an equivalent system that
 \indent Row Reduction Procedure:
 \begin{enumerate}
 	\item Construct the augmented matrix
-		\begin{center}
-			$\begin{bmatrix}
-				1 & -2 & 1 & 0\\ 
-				0 & 2 & -8 & 8\\
-				5 & 0 & -5 & 10\\
-			 \end{bmatrix}$
-		\end{center}
+		$$\begin{bmatrix}
+			1 & -2 & 1 & 0\\ 
+			0 & 2 & -8 & 8\\
+			5 & 0 & -5 & 10\\
+		\end{bmatrix}$$
+		
 	\item $R_3 - 5R_1$
-		\begin{center}
-			$\begin{bmatrix}
-				1 & -2 & 1 & 0\\ 
-				0 & 2 & -8 & 8\\
-				0 & 10 & -10 & 10\\
-			 \end{bmatrix}$
-		\end{center}
+		$$\begin{bmatrix}
+			1 & -2 & 1 & 0\\ 
+			0 & 2 & -8 & 8\\
+			0 & 10 & -10 & 10\\
+		\end{bmatrix}$$
+
 	\item $\frac{1}{2} R_2$
-		\begin{center}
-			$\begin{bmatrix}
-				1 & -2 & 1 & 0\\ 
-				0 & 1 & -4 & 4\\
-				5 & 0 & -5 & 10\\
-			 \end{bmatrix}$
-		\end{center}
+		$$\begin{bmatrix}
+			1 & -2 & 1 & 0\\ 
+			0 & 1 & -4 & 4\\
+			5 & 0 & -5 & 10\\
+		\end{bmatrix}$$
+
 	\item $R_3 - 10R_2$
-		\begin{center}
-			$\begin{bmatrix}
-				1 & -2 & 1 & 0\\ 
-				0 & 1 & -4 & 4\\
-				0 & 0 & 30 & -30\\
-			 \end{bmatrix}$
-		\end{center}
+		$$\begin{bmatrix}
+			1 & -2 & 1 & 0\\ 
+			0 & 1 & -4 & 4\\
+			0 & 0 & 30 & -30\\
+		\end{bmatrix}$$
+
 	\item $\frac{1}{30}R_3$
-		\begin{center}
-			$\begin{bmatrix}
-				1 & -2 & 1 & 0\\ 
-				0 & 1 & -4 & 4\\
-				0 & 0 & 1 & -1\\
-			 \end{bmatrix}$
-		\end{center}
+		$$\begin{bmatrix}
+			1 & -2 & 1 & 0\\ 
+			0 & 1 & -4 & 4\\
+			0 & 0 & 1 & -1\\
+		\end{bmatrix}$$
+
 	\item $R_1 - R_3 and R_2 + 4R_3$
-		\begin{center}
-			$\begin{bmatrix}
-				1 & -2 & 0 & 1\\ 
-				0 & 1 & 0 & 0\\
-				0 & 0 & 1 & -1\\
-			 \end{bmatrix}$
-		\end{center}
-	\leavevmode \\
+		$$\begin{bmatrix}
+			1 & -2 & 0 & 1\\ 
+			0 & 1 & 0 & 0\\
+			0 & 0 & 1 & -1\\
+		\end{bmatrix}$$
+
 	\item $R_1 + 2R_2$
-		\begin{center}
-			$\begin{bmatrix}
-				1 & 0 & 0 & 1\\ 
-				0 & 1 & 0 & 0\\
-				0 & 0 & 1 & -1\\
-			 \end{bmatrix}$
-		\end{center}
+		$$\begin{bmatrix}
+			1 & 0 & 0 & 1\\ 
+			0 & 1 & 0 & 0\\
+			0 & 0 & 1 & -1\\
+		\end{bmatrix}$$
+
 	\item Verify the solution $(1, 0, -1)$ by substituting it for $(x_1, x_2, x_3)$ in the original system
 		\begin{align*}
 			(1) - 2(0) + (-1) &= 0\\
@@ -198,11 +189,11 @@ The basic strategy is to \emph{replace one system with an equivalent system that
 			5(1) - 5(-1) &= 10\\
 		\end{align*}
 \end{enumerate}
-The equations agree so $(1, 0, -1)$ is indeed a solution to the system. $\blacksquare$\\
+The equations agree so $(1, 0, -1)$ is indeed a solution to the system. $\blacksquare$
 
-These row operations can be applied to any matrix \textemdash not just those that arise as the augmented matrices of a linear system.\\
+These row operations can be applied to any matrix \textemdash not just those that arise as the augmented matrices of a linear system.
 
-\emph{Row equivalent:} quality of two matrices if there exists a sequence of elementary row operations that transforms one matrix into the other\\
+\emph{Row equivalent:} quality of two matrices if there exists a sequence of elementary row operations that transforms one matrix into the other
 
 \textbf{All row operations are reversible. Hence, \emph{If the augmented matrices of two linear systems are row equivalent, then the two systems have the same solution set.}}
 
@@ -212,15 +203,16 @@ A large focus of the course and of the analysis of linear systems generally depe
 	\item Is the system consistent?
 	\item If a solution exists, is it unique?
 \end{itemize}
-These questions can often be answered from the triangular form of the matrix (in Example 1 this was $\begin{bmatrix}1 & -2 & 1 & 0\\ 0 & 1 & -4 & 4\\0 & 0 & 1 & -1\\ \end{bmatrix}$) by understanding that $x_3 = -1$ and solving the other equations from there. \\
-If this method creates contradictions, however, such as in the system $\begin{bmatrix}a & b & c & d\\ e & f & g & h\\0 & 0 & 0 & 1\\ \end{bmatrix}$, then the originial system is inconsistent. \\
+These questions can often be answered from the triangular form of the matrix (in Example 1 this was $\begin{bmatrix}1 & -2 & 1 & 0\\ 0 & 1 & -4 & 4\\0 & 0 & 1 & -1\\ \end{bmatrix}$) by understanding that $x_3 = -1$ and solving the other equations from there. 
+
+If this method creates contradictions, however, such as in the system $\begin{bmatrix}a & b & c & d\\ e & f & g & h\\0 & 0 & 0 & 1\\ \end{bmatrix}$, then the originial system is inconsistent. 
 
 %----------------------------------------------------------------------------------------------------------------------------------------%
 \pagebreak
 \subsection{TOPIC 2: Row Reduction and Echelon Forms}
-\emph{Nonzero:} any row or column which contains at least one nonzero entry\\
+\emph{Nonzero:} any row or column which contains at least one nonzero entry
 
-\emph{Leading entry:} the leftmost nonzero entry of a row\\
+\emph{Leading entry:} the leftmost nonzero entry of a row
 
 \emph{Row echelon form:} a matrix is in row echelon form if it has the following three properties:
 \begin{enumerate}
@@ -234,68 +226,62 @@ If this method creates contradictions, however, such as in the system $\begin{bm
 \item The leading entry in each nonzero row is 1
 \item Each leading 1 is the only nonzero entry in its column
 \end{enumerate}
-These are the "triangular" matrices of section 1.1.\\
+These are the "triangular" matrices of section 1.1.
 
-\textbf{\emph{Each matrix is row equivalent to one and only one reduced echelon matrix.}}\\
+\textbf{\emph{Each matrix is row equivalent to one and only one reduced echelon matrix.}}
 
-If a matrix $A$ is row equivalent to an echelon matrix $U$, we call $U$ an \emph{(reduced) echelon form (REF/RREF) of $A$}\\
+If a matrix $A$ is row equivalent to an echelon matrix $U$, we call $U$ an \emph{(reduced) echelon form (REF/RREF) of $A$}
 
 \subsubsection{Pivot Positions}
-\emph{Pivot position:} a location in a matrix $A$ that corresponds to a leading 1 in the reduced echelon form of $A$.\\
+\emph{Pivot position:} a location in a matrix $A$ that corresponds to a leading 1 in the reduced echelon form of $A$.
 
-\emph{Pivot column:} a column of $A$ that contains a pivot position\\
+\emph{Pivot column:} a column of $A$ that contains a pivot position
 \subsubsection{Example 2: Row reduce matrix A below to echelon form and locate its pivot columns.}
-\begin{center}
-	$A = \begin{bmatrix}
-			0 & -3 & -6 & 4 & 9\\
-			-1 & -2 & -1 & 3 & 1\\
-			-2 & -3 & 0 & 3 & -1\\
-			1 & 4 & 5 & -9 & -7\\
-		\end{bmatrix}$
-\end{center}
+$$A = \begin{bmatrix}
+	0 & -3 & -6 & 4 & 9\\
+	-1 & -2 & -1 & 3 & 1\\
+	-2 & -3 & 0 & 3 & -1\\
+	1 & 4 & 5 & -9 & -7\\
+\end{bmatrix}$$
+
 Solution:
 \begin{enumerate}
 \item Interchange $R_1$ and $R_4$
-	\begin{center}
-		$\begin{bmatrix}
-			1 & 4 & 5 & -9 & -7\\
-			-1 & -2 & -1 & 3 & 1\\
-			-2 & -3 & 0 & 3 & -1\\
-			0 & -3 & -6 & 4 & 9\\
-		\end{bmatrix}$
-	\end{center}
-\item $R_2 + R_1$ and $R_3 + 2R_1$
-	\begin{center}
-		$\begin{bmatrix}
-			1 & 4 & 5 & -9 & -7\\
-			0 & 2 & 4 & -6 & -6\\
-			0 & 5 & 10 & -15 & -15\\
-			0 & -3 & -6 & 4 & 9\\
-		\end{bmatrix}$
-	\end{center}
-\item $R_3 -\frac{5}{2}R_2$ and $R_4 + \frac{3}{2}R_2$
-	\begin{center}
-		$\begin{bmatrix}
-			1 & 4 & 5 & -9 & -7\\
-			0 & 2 & 4 & -6 & -6\\
-			0 & 0 & 0 & 0 & 0\\
-			0 & 0 & 0 & -5 & 0\\
-		\end{bmatrix}$
-	\end{center}
-\leavevmode \\
-\item Interchange $R_3$ and $R_4$
-	\begin{center}
-		$\begin{bmatrix}
-			1 & 4 & 5 & -9 & -7\\
-			0 & 2 & 4 & -6 & -6\\
-			0 & 0 & 0 & -5 & 0\\
-			0 & 0 & 0 & 0 & 0\\
-		\end{bmatrix}$
-	\end{center}	
-\end{enumerate}
-Matrix $A$ is thus in echelon form and so columns 1, 2, and 4 are pivot columns.\\
+	$$\begin{bmatrix}
+		1 & 4 & 5 & -9 & -7\\
+		-1 & -2 & -1 & 3 & 1\\
+		-2 & -3 & 0 & 3 & -1\\
+		0 & -3 & -6 & 4 & 9\\
+	\end{bmatrix}$$
 
-\emph{Pivot:} a nonzero number in a pivot position which is used during row reduction to create zeros\\
+\item $R_2 + R_1$ and $R_3 + 2R_1$
+	$$\begin{bmatrix}
+		1 & 4 & 5 & -9 & -7\\
+		0 & 2 & 4 & -6 & -6\\
+		0 & 5 & 10 & -15 & -15\\
+		0 & -3 & -6 & 4 & 9\\
+	\end{bmatrix}$$
+
+\item $R_3 -\frac{5}{2}R_2$ and $R_4 + \frac{3}{2}R_2$
+	$$\begin{bmatrix}
+		1 & 4 & 5 & -9 & -7\\
+		0 & 2 & 4 & -6 & -6\\
+		0 & 0 & 0 & 0 & 0\\
+		0 & 0 & 0 & -5 & 0\\
+	\end{bmatrix}$$
+
+\item Interchange $R_3$ and $R_4$
+	$$\begin{bmatrix}
+		1 & 4 & 5 & -9 & -7\\
+		0 & 2 & 4 & -6 & -6\\
+		0 & 0 & 0 & -5 & 0\\
+		0 & 0 & 0 & 0 & 0\\
+	\end{bmatrix}$$
+	
+\end{enumerate}
+Matrix $A$ is thus in echelon form and so columns 1, 2, and 4 are pivot columns.
+
+\emph{Pivot:} a nonzero number in a pivot position which is used during row reduction to create zeros
 
 \subsubsection{The Row Reduction Algorithm}
 \begin{enumerate}
@@ -303,15 +289,15 @@ Matrix $A$ is thus in echelon form and so columns 1, 2, and 4 are pivot columns.
 	\item Select a nonzero entry in the pivot column as a pivot. If necessary, interchange rows to move this entry into the pivot position. 
 	\item Use row replacement operations to create zeros in all positions below the pivot.
 	\item Cover the row containing the pivot position and all rows above it. Apply steps 1-3 to the remaining submatrix, iterating until there are no more nonzero rows to modify. At this time we have the row echelon form.
-	\item This step is used to find the reduced row echelon form. Beginning with the righmost pivot and working upward and to the left, create zeros above each pivot. If a pivot is not 1, make it 1 via scaling operation.
+	\item This step is used to find the reduced row echelon form. Beginning with the rightmost pivot and working upward and to the left, create zeros above each pivot. If a pivot is not 1, make it 1 via scaling operation.
 \end{enumerate}
-\leavevmode \\
+
 \subsubsection{Solutions of Linear Systems}
-The row reduction algorithm leads directly to the solution set of a system when the algorithm is applied to the augmented matrix of the system.\\
+The row reduction algorithm leads directly to the solution set of a system when the algorithm is applied to the augmented matrix of the system.
 
-\emph{Basic variables:} the variables of a linear system corresponding to pivot columns in the reduced echelon matrix \\
+\emph{Basic variables:} the variables of a linear system corresponding to pivot columns in the reduced echelon matrix 
 
-\emph{Free variables:} the other variables in the system\\
+\emph{Free variables:} the other variables in the system
 
 Whenever a system is consistent, the solution set can be described explicitly by solving the reduced system of equations for the basic variables in terms of the free variables.\\
 Each different choice of a free variable determines a (different) solution of the system and every solution of the system is determined by a choice of the free variables.
@@ -369,7 +355,7 @@ Because the pivot columns are 1, 3, and 5, the basic variables are $x_1, x_3, an
 	\end{cases}$
 \end{center}
 \subsubsection{Existence and Uniqueness Questions (Redux)}
-When a system is in echelon form and contains no equation of the form $0 = b (b \neq 0)$, \emph{every} nonzero equation contains a basic variable with a nonzero coefficient. Either the basic variables are completely determined (no free variables), signifying a unique solution, or the basic variables can be expressed in terms of one or more free variables, signifying infinitely many solutions. Thus:\\
+When a system is in echelon form and contains no equation of the form $0 = b (b \neq 0)$, \emph{every} nonzero equation contains a basic variable with a nonzero coefficient. Either the basic variables are completely determined (no free variables), signifying a unique solution, or the basic variables can be expressed in terms of one or more free variables, signifying infinitely many solutions. Thus:
 \textbf{A linear system is consistent iff the rightmost column of the augmented matrix is \emph{not} a pivot column (i.e. there are no rows of the form $\begin{bmatrix} 0 & ... & 0 & b\end{bmatrix}$).}
 
 
@@ -377,7 +363,9 @@ When a system is in echelon form and contains no equation of the form $0 = b (b 
 \pagebreak
 \subsection{TOPIC 3: Vector Equations}
 \emph{Column vector:} a matrix with only one column
-$$\mathbf{w}= \begin{bmatrix}w_1 \\ w_2 \end{bmatrix}$$
+$$\mathbf{w}= \begin{bmatrix}
+	w_1 \\ w_2 
+\end{bmatrix}$$
 The set of all vectors with two entries is denoted $\mathbb{R}^2$ ("r-two"), where $\mathbb{R}$ refers to the real number entries of the vector and the exponent 2 indicates that each vector contains two entries.\\
 Vectors in $\mathbb{R}$ are ordered pairs which are equal iff their corresponding entries are equal.\\
 
@@ -389,7 +377,7 @@ while the scalar multiple of a vector is
 \subsubsection{Geometric Descriptions of $\R^2$}
 Because each point in the cartesian plane is determined by an ordered pair of numbers, we can identify a geometric point with the column vector $\begin{bmatrix}a \\ b\end{bmatrix}$. So we may regard $\R^2$ as the set of all points in the plane.\\
 
-\emph{Parellelogram rule for vector addition:} If \textbf{u} and \textbf{v} in $\R^2$ are represented as points in the plane, then $\textbf{u} + \textbf{v}$ corresponds to the fourth vertex of the parellolgram whose other vertices are $\textbf{u}$, $\textbf{0}$, and $\textbf{v}$.
+\emph{Parellelogram rule for vector addition:} If \textbf{u} and \textbf{v} in $\R^2$ are represented as points in the plane, then $\textbf{u} + \textbf{v}$ corresponds to the fourth vertex of the parellelogram whose other vertices are $\textbf{u}$, $\textbf{0}$, and $\textbf{v}$.
 
 \subsubsection{Algebraic Properties of $\R^n$}
 For all $\bf{u}, \bf{v}, \bf{w}$ in $\R^n$ and all scalars $c$ and $d$:
@@ -493,8 +481,9 @@ This suggests that $0 = -2$ but as this is not possible, the matrix is inconsist
 \item $\R^n$: \indent the set of vectors with \emph{n} real-valued elements\\
 \item $\R^{m\times n}$: \indent the set of real-valued matrices with \emph{m} as rows and \emph{n} as columns\\
 \end{itemize}
+
 Example:
-The notation $\vec{x} \in \R^5 m$ measn that $\vec{x}$ is a vector with five real-valued elements.\\
+The notation $\vec{x} \in \R^5 m$ means that $\vec{x}$ is a vector with five real-valued elements.\\
 
 \subsubsection{Matrix-Vector Product as a Linear Combination}
 If $A \in \R^{m\times n}$ has columns $\vec{a_1}, ..., \vec{a_n}$, then the matrix vector product $A\vec{x}$ is a linear combination of the columns of \emph{A}. 
@@ -1063,7 +1052,7 @@ Hence, \textit{the transpose of a product of matrices equals the product of thei
 %----------------------------------------------------------------------------------------------------------------------------------------%
 \pagebreak
 \subsection{TOPIC 2: The Inverse of a Matrix}
-\emph{Invertible:} a square matric is invertible if there is a matrix $C \in \R^{n \times n}$ such that 
+\emph{Invertible:} a square matrix is invertible if there is a matrix $C \in \R^{n \times n}$ such that 
 $$CA = I \quad \text{and} \quad AC = I$$
 Here, C is the unique inverse of A often denoted $A^-1$
 
@@ -1097,13 +1086,13 @@ Properties of invertible matrices:
 	\item $(A^T)^-1 = (A^-1)^T$
 \end{enumerate}
 
-\emph{Elementary matrix:} a matric that is obtained by performing a single elementary row operation on an identity matrix.
+\emph{Elementary matrix:} a matrix that is obtained by performing a single elementary row operation on an identity matrix.
 
 If an elementary row operation is performed on an $m \times n$ matrix A, the resulting matrix can be written as $EA$, where the $m \times m$ matrix $E$ is created by performing the same row operation on $I_m$.
 
-\textbf{Every elementary matrix is invertible and square} where the inverse of E is the elementary matrix that trasforms E back into I.
+\textbf{Every elementary matrix is invertible and square} where the inverse of E is the elementary matrix that transforms E back into I.
 
-\emph{An $n \times n$ matrix is invertible iff A is row equivalent to $I_n$, in which case any sequence of elemenary row operations which maps $A \mapsto I_n$ also transforms $I_n \mapsto A^{-1}$}
+\emph{An $n \times n$ matrix is invertible iff A is row equivalent to $I_n$, in which case any sequence of elementary row operations which maps $A \mapsto I_n$ also transforms $I_n \mapsto A^{-1}$}
 
 $A$ has an inverse iff for all $\vec{b} \in \R^n$, $Ax=b$ has a unique solution
 
@@ -1223,10 +1212,10 @@ Partitioned matrices can be multiplied by the usual row-column rule as if the bl
 
 \emph{Conformable:} property of two matrices that are partitioned the same way
 
-\emph{Block diagonal matrix:} a paritioned matrix with zero blocks off the main diagonals 
+\emph{Block diagonal matrix:} a partitioned matrix with zero blocks off the main diagonals 
 \quad - such a matrix is invertible iff each block on the diagonal is invertible
 
-Paritioned matrices are especially useful in numerical slutions of especially large systems where partitioning can make more efficient use of system resources
+Partitioned matrices are especially useful in numerical solutions of especially large systems where partitioning can make more efficient use of system resources
 
 %----------------------------------------------------------------------------------------------------------------------------------------%
 
@@ -1429,7 +1418,7 @@ $$D = \begin{bmatrix}
 	0 & 0 & 6.42 & 0 & 8 & 8 & 1.58 & 8
 \end{bmatrix}$$
 
-This represetation makes the transformation or animation of pictures very easy: the resultant figure is described by the matrix product $AD$ where A is any linear transformation.
+This representation makes the transformation or animation of pictures very easy: the resultant figure is described by the matrix product $AD$ where A is any linear transformation.
 
 Unfortunately, translation is not a linear transform so cannot be represented by matrix multiplication. 
 
@@ -1453,7 +1442,7 @@ $$\begin{bmatrix}
 	1
 \end{bmatrix}$$
 
-More broadly, any linear transformation in $\R^2$ can be represented in homogeneous coordinates by a paritioned matrix of the form $\begin{bmatrix}
+More broadly, any linear transformation in $\R^2$ can be represented in homogeneous coordinates by a partitioned matrix of the form $\begin{bmatrix}
 	A & 0\\
 	0 & 1
 \end{bmatrix}$ where $A$ is a $2 \times 2$ standard matrix.
@@ -1508,7 +1497,7 @@ $$x = c_1 \mathbf{b}_1 + ... + c_p \mathbf{b}_p$$
 
 \emph{Isomorphism:} a correspondence $x \mapsto [x]_\mathfrak{B}$ which is a one-to-one mapping which preserves linear combinations.
 
-\emph{Dimension:} the dimensions of a nonzero subspace H, denoted dim H, is the number of vectors in any bassis for H
+\emph{Dimension:} the dimensions of a nonzero subspace H, denoted dim H, is the number of vectors in any basis for H
 
 The space $\R^n$ has dimension n so every basis for $\R^n$ consists of n vectors. Similarly, a plane through \textbf{0} is two-dimensional while a line through \textbf{0} is one-dimensional. 
 
@@ -1530,4 +1519,351 @@ For an $n \times n$ matrix A, the following statements are equivalent to the sta
 	\item Nul A = \{\textbf{0}\}
 	\item dim Nul A = 0
 \end{enumerate}
+
+%--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+\pagebreak
+
+\section{Module 3: Determinants, Eigenvalues, and Markov Chains}
+\subsection{TOPIC 1: INTRODUCTION TO DETERMINANTS}
+A $2 \times 2$ matrix is invertible iff its determinant is nonzero.
+
+For a $1 \times 1$: $\det A = a_{11}$
+
+For a $2 \times 2$: $\det A = a_{11}a_{22} - a_{12}a_{21}$
+
+For a $3 \times 3$:
+$$\Delta = a_{11} \cdot \det 
+\begin{bmatrix}
+	a_{22} & a_{23}\\ 
+	a_{32} & a_{33}
+\end{bmatrix} - a_{12} \cdot \det \begin{bmatrix}
+	a_{21} & a_{23}\\ 
+	a_{31} & a_{33}
+\end{bmatrix} + a_{13} \cdot \det \begin{bmatrix}
+	a_{21} & a_{22}\\ 
+	a_{31} & a_{32}
+\end{bmatrix}$$
+This is equivalent to 
+$$\Delta = a_11 \cdot \det A_{11} - a_{12} \cdot \det A_{12} + a_{13} \cdot \det A_{13}$$
+Where $A_{11}, A_{12}, A_{13}$ are obtained from A by deleting the first row and one of the three columns. (And where $A_{ij}$ is the matrix formed by deleting the i-th row and j-th column of A).
+
+\textbf{In general, an $n \times n$ determinant is defined by the determinants of $(n - 1) \times (n - 1)$ submatrices.}
+
+$$\det A = \sum_{j=1}^n (-1)^{1 + j} a_{1j} \det A_{1j}$$
+
+\subsubsection{Example:}
+Compute the determinant of 
+$$A = \begin{bmatrix}
+	1 & 5 & 0\\
+	2 & 4 & -1\\
+	0 & -2 & 0
+\end{bmatrix}$$
+
+Solution:
+\begin{align*}
+	\det A &= 1 \begin{vmatrix}
+		4 & -1\\
+		-2 & 0
+	\end{vmatrix} - 5 \begin{vmatrix}
+		2 & -1\\
+		0 & 0\\
+	\end{vmatrix} + 0 \begin{vmatrix}
+		2 & 4\\
+		0 & -2
+	\end{vmatrix}\\
+	&= 1(0 - 2) - 5(0) + 0(-4 - 4)\\
+	&= -2
+\end{align*}
+
+\emph{(i, j)-cofactor of A:} the number given by $C_{ij} = (-1)^{i + j} \det A_{ij}$
+
+\emph{Cofactor expansion across the i-th row of A:} a method of computing the determinant with use of cofactors 
+$$\det A = a_{i1} C_{i1} + a_{i2} C_{i2} + ... + a_{in} C_{in}$$
+
+The plus or minus in the (i, j)-cofactor depends on the position of $a_{ij}$ in the matrix:
+$$\begin{bmatrix}
+	+ & - & + & ...\\
+	- & + & - & \\
+	+ & - & + & \\
+	\vdots & & & \ddots
+\end{bmatrix}$$
+
+\subsubsection{Example:} Use a cofactor expansion across the third row to compute $\det A$ for 
+$$A = \begin{bmatrix}
+	1 & 5 & 0\\
+	2 & 4 & -1\\
+	0 & -2 & 0
+\end{bmatrix}$$
+
+Solution:
+\begin{align*}
+	\det A &= a_{31} C_{31} + a_{32} C_{32} + a_{33} C_{33}\\
+	&= a_{31} (-1)^{3 + 1} \det A_{31} +  a_{32} (-1)^{3 + 2} \det A_{32} +  a_{33} (-1)^{3 + 3} \det A_{33}\\
+	&= 0 + (-2)(-1)\begin{vmatrix}
+		1 & 0\\
+		2 & -1
+	\end{vmatrix} + 0\\
+	&= 2(-1) = -2
+\end{align*}
+
+The cofactor approach is particularly useful in matrices with many zeros because those cofactors need not be calculated.
+
+\textbf{If A is a triangular matrix, then det A is the product of the entries on the main diagonal of A}
+
+Numerical note: in general, a cofactor expansion requires more than $n!$ multiplications
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{TOPIC 2: Properties of Determinants}
+For a square matrix A:
+\begin{enumerate}
+	\item Row replacement operations on A to produce a matrix B make $\det B = \det A$
+	\item Row interchange operations on A to produce B make $\det B = -\det A$
+	\item Row scaling operations make $\det B = k\det A$
+\end{enumerate}
+
+Using these operations, we can reduce a matrix to echelon form and use the fact that the determinant of a triangular matrix is the product of its diagonal entries to more efficiently calculate the determinant. 
+
+\subsubsection{Example:} Compute det A for 
+$$A = \begin{bmatrix}
+	1 & -4 & 2\\
+	-2 & 8 & -9\\
+	-1 & 7 & 0
+\end{bmatrix}$$
+
+Solution:
+$$\det A = \begin{vmatrix}
+	1 & -4 & 2\\
+	0 & 0 & -5\\
+	0 & 3 & 2
+\end{vmatrix} = \begin{vmatrix}
+	1 & -4 & 2\\
+	0 & 3 & 2\\
+	0 & 0 & -5
+\end{vmatrix}$$
+As replacement does not change the determinant and interchange only changes the sign,
+$$\det A = - (1)(3)(-5) = 15$$
+
+If a square matrix A has been reduced to echelon form U by row replacements and $r$ interchanges alone, 
+$$\det A = (-1)^r \det U$$
+Further,
+$$\det A = \begin{cases}
+	(-1)^r \cdot \prod\limits_{i=1}^n U_{ii}  & \text{when A is invertible}\\
+	0 & \text{when A is not invertible}
+\end{cases}$$
+
+\textbf{A square matrix A is invertible iff $\det A \neq 0$}
+
+Numerical note: the row reduction method of calculating the determinant takes only about $2n^3 / 3$ operations compared to the $n!$ of cofactor expansion.
+
+If A is an $n \times n$ matrix, then $\det A^T = \det A$
+
+\subsubsection{Determinants and Matrix Products}
+\emph{Multiplicative property:} For square matrices A and B, $$\det AB = (\det A)(\det B)$$
+
+NOTE: $\det (A+B)$ is usually \emph{not} equal to $\det A + \det B$
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{TOPIC 3: Cramer's rule, volume, and linear transformations}
+\emph{Cramer's rule:} Let A be an invertible $n \times n$ matrix and $A_i(\vec{b})$ be the matrix obtained from A by replacing column $i$ by the vector $\vec{b}$. For any $\vec{b}$ in $\R^n$, the unique solution of $A\vec{x} = \vec{b}$ has entries given by 
+$$x_i = \frac{\det A_i(\vec{b})}{\det A}, \quad i = 1, 2, ..., n$$
+
+Example: Use Cramer's rule to solve the system
+\begin{align}
+	3x_1 - 2x_2 &= 6\\
+	-5x_1 + 4x_2 = 8
+\end{align}
+
+Solution: 
+$$A=\begin{bmatrix}
+	3 & -2\\
+	-5 & 4
+\end{bmatrix}, \quad A_1(\vec{b}) = \begin{bmatrix}
+	6 & -2\\
+	8 & 4
+\end{bmatrix}, \quad A_2(\vec{b}) = \begin{bmatrix}
+	3 & 6\\
+	-5 & 8
+\end{bmatrix}$$
+Since $\det A = 2$ the system has a unique solution. By Cramer's rule:
+\begin{align*}
+	x_1 &= \frac{\det A_i(\vec{b})}{\det A} = \frac{24 + 16}{2} = 20\\
+	x_2 &= \frac{\det A_i(\vec{b})}{\det A} = \frac{24 + 30}{2} = 27
+\end{align*}
+
+\emph{Laplace transforms:} an approach, useful in many engineering problems, which involves converting an appropriate system of linear differential equations into a system of linear algebraic equations whose coefficients involve a parameter.
+
+\emph{Adjugate (classical adjoint) of A:} the transpose of the matrix of cofactors of A
+$$\text{adj}A = \begin{bmatrix}
+	C_{11} & C_{21} & ... C_{n1}\\
+	C_{12} & C_{22} & ... C_{n2}\\
+	\vdots & \vdots & & \vdots\\
+	C_{1n} & C_{2n} & ... & C_{nn}
+\end{bmatrix}$$
+
+For an invertible square matrix A, 
+$$A^{-1} = \frac{1}{\det A} \text{adj} A$$
+
+Cramer's rule is a theoretical tool for studying the tolerance of the solution to Ax = b to changes in entry b or A. It is sometimes useful for hand calculation of $3 \times 3$ matrices with complex entries. Usually, \emph{it is hopelessly inefficient}.
+
+\subsubsection{Determinants as Area or Volume}
+If A is $2 \times 2$, the area of the parellelogram determined by the columns of A is $|\det A|$.
+
+If A is $3 \times 3$, the volume of the parralelepiped determined by the columns of A is also $|\det A|$
+
+Example: Calculate the area of the parellelogram determined by the points (-2, -2), (0, 3), (4, -1), and (6, 4)
+
+Solution:
+First, translate the parellelogram to the origin by subtracting (-2, -2) from each of the other vertices.
+The new vertices have coordinates (0, 0), (2, 5), (6, 1), and (8,6).
+This is in the Span of 
+$$A = \begin{bmatrix}
+	2 & 6\\
+	5 & 1
+\end{bmatrix}$$
+
+And $|\det A| = -28$, so the area of the parellelogram is 28.
+
+\subsubsection{Linear transformations}
+Let $T : \R^2 \mapsto \R^2$. If $S$ is a parallelogram in $\R^2$ and $T(S)$ is the set of images of points of S, 
+$$\{area of T(S)\} = |\det A| \{area of S\}$$
+This statement is analogous for volume in $\R^3$
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{TOPIC 4: Markov Chains}
+\emph{Probability vector:} a vector with nonnegative entries that add up to 1
+
+\emph{Stochastic matrix:} a square matrix whose columns are probability vectors
+
+\emph{Markov Chain:} a model used to describe an experiment or measurement which is performed many times in the same way, where the outcome of each trial depends only on the immediately preceding trial
+It can also be represented as a sequence of probability vectors $\mathbf{x}_0, \mathbf{x}_1, \mathbf{x}_2...$ together with a stochastic matrix P such that 
+$$\mathbf{x}_1 = P\mathbf{x}_0, \quad  \mathbf{x}_2 = P\mathbf{x}_1, \quad  \mathbf{x}_3 = P\mathbf{x}_2, ...$$
+Thus the Markov chain is described by the first-order difference equation
+$$\mathbf{x}_{k + 1} = P\mathbf{x}_k \quad \text{for } k = 0, 1, 2, ...$$
+
+In general, $\mathbf{x}_k = P^k \mathbf{x}_0$
+
+When a Markov chain of vectors is in $\R^n$, the entries in $\mathbf{x}_k$ (called the \emph{state vector}) list the probabilities that the system is in each of n possible states or that the outcome of the experiment is one of n possible outcomes. 
+
+\emph{Steady-state vector (equilibrium vector):} If P is a stochastic matrix, then a steady-state vector for P is a probability vector \textbf{q} such that 
+$$P\mathbf{q} = \mathbf{q}$$
+
+Every stochastic matrix has a steady-state vector
+
+To find the steady-state vector solve the equation $P\mathbf{x} = \mathbf{x}$:
+\begin{align*}
+	P\mathbf{x} - \mathbf{x} &= 0\\
+	P\mathbf{x} - I\mathbf{x} &= 0\\
+	(P - I)\mathbf{x} &= 0
+\end{align*}
+Which can be solved by row reduction to find the general solution. 
+
+Next, choose a simple basis for the solution space and divide that by the sum of its entries to find a probability vector q in the set of solutions of $Px = x$. 
+
+\emph{Regular:} a quality of a stochastic matrix where some matrix power of $P^k$ contains only strictly positive entries. 
+
+\textbf{If P is an $n \times n$ regular stochastic matrix, then P has a unique steady-state vector q. Further, if $x_0$ is any initial state and $x_{k + 1} = Px_k$ for k = 0, 1, 2, ... then the Markov chain $\{x_k\}$ converges to q as $k \rightarrow \infty$}
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{TOPIC 5: Eigenvalues and Eigenvectors}
+
+\emph{Eigenvector:} a nonzero vector x such that $Ax = \lambda x$ for some $n \times n$ matrix A and scalar $\lambda$
+
+\emph{Eigenvalue:} a scalar $\lambda$ for which there is a nontrivial solution of $Ax = \lambda x$ (where x is an eigenvector corresponding to $\lambda$)
+
+Example: Show that 7 is an eigenvalue of $\begin{bmatrix}
+	1 & 6\\
+	5 & 2
+\end{bmatrix}$
+
+7 is an eigenvalue of A iff 
+$$Ax = 7x$$
+Thus, 
+\begin{align*}
+	Ax - 7x &= 0\\
+	(A - 7I)x &= 0\\
+	A - 7I &= \begin{bmatrix}
+		-6 & 6\\
+		5 & -5
+	\end{bmatrix} 
+\end{align*}
+
+The columns of A are linearly dependent so 7 \emph{is} an eigenvalue of A. The eigenvectors are:
+$$\begin{bmatrix}
+	-6 & 6 & 0\\
+	5 & -5 & 0
+\end{bmatrix} \sim \begin{bmatrix}
+	1 & -1 & 0\\
+	0 & 0 & 0
+\end{bmatrix}$$
+So, every vector of the form $x_2 \begin{bmatrix}
+	1 \\ 1
+\end{bmatrix}$ ($x_2 \neq 0$) is an eigenvector corresponding to $\lambda = 7$ $\blacksquare$
+
+Warning: row reduction can be used to find eigenvectors but not eigenvalues. An echelon form of matrix A usually does not display the eigenvalues of A. 
+
+$\lambda$ is an eigenvalue of an $n \times n$ matrix A iff the equation $(A - \lambda I)x = 0$ has a nontrivial solution.
+
+The set of all solutions of that equation is just the nullspace of $A - \lambda I$ so this set is a subspace of $\R^n$
+
+\emph{Eigenspace:} the subspace of $\R^n$ consisting of the zero vector and all the eigenvectors corresponding to $\lambda$
+
+A scalar $\lambda$ will be an eigenvalue of A if $(A - \lambda I)x = 0$ has free variables
+
+\subsubsection{Difference equations:}
+Eigenvectors can be used to construct solutions of the first-order difference equation
+$$x_{k+1} = Ax_k \quad (k = 0, 1, 2, ...)$$
+
+A solution of this equation is an explicit description o the sequence $\{x_k\}$ whose formula for each $x_k$ does not depend directly on A or on the preceding terms in the sequence. The simplest way to build this solution is to take an eigenvector $x_0$ and a corresponding eigenvalue such that 
+$$x_k = \lambda^k x_0$$
+
+Which is a solution because 
+$$Ax_k = A(\lambda^k x_0)= \lambda^k (Ax_0) = \lambda^k (\lambda x_0) = \lambda^{k + 1}x_0 = x_{k+1}$$
+
+Eigenvalue Theorems:
+\begin{enumerate}
+	\item The eigenvalues of a triangular matrix are the entries on its main diagonal
+	\item 0 is an eigenvalue of A $\iff$ A is not invertible
+	\item Stochastic matrices have an eigenvalue equal to 1
+	\item If $\vec{v}_1, \vec{v}_2, ..., \vec{v}_k$ are eigenvectors that correspond to distinct eigenvalues, then those eigenvectors are linearly independent
+\end{enumerate}
+%----------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{TOPIC 6: The Characteristic Equation}
+A scalar $\lambda$ is an eigenvalue of an $n \times n$ matrix A iff $\lambda$ satisfies the characteristic equation 
+$$\det (A - \lambda I) = 0$$
+(Because a matrix is invertible iff 0 is not an eigenvalue of a square matrix A and the determinant is also not 0 by the Invertible Matrix Theorem)
+
+\emph{Characteristic polynomial of A:} the expanded form of $\det(A-\lambda I)$ for an $n \times n$ matrix which will be a polynomial of degree n
+
+\emph{Trace:} the sum of the diagonal elements of its matrices
+
+When a ($2 \times 2$) matrix is singular, one eigenvalue is 0 and the other is the trace.
+
+Warnings:
+\begin{enumerate}
+	\item Matrices can have the same eigenvalues but not be similar
+	\item Similarity is not the same as row equivalence
+	\item Row operations on a matrix usually change its eigenvalues
+\end{enumerate}
+
+\emph{Algebraic multiplicity:} the multiplicity of an eigenvalue as a root of the characteristic polynomial
+
+\emph{Geometric multiplicity:} the dimension of $\text{Null}(A-\lambda I)$
+\begin{itemize}
+	\item Geometric multiplicity is always at least 1
+\end{itemize}
+
+For an $n \times n$ matrix A with $a_i$ as the algebraic multiplicity of $\lambda_i$ and $g_i$ the geometric multiplicity:
+\begin{enumerate}
+	\item $1 \leq a_i \leq n$
+	\item $1 \leq g_i \leq a_i$
+\end{enumerate}
+
+\subsubsection{Similarity}
+If A and B are square matrices, then A is similar to B if there is a matrix P such that $P^{-1} AP = B$. If so, A and B have the same characteristic polynomial and hence the same eigenvalues with the same multiplicities.
+
+This can lead to a more efficient algorithm for calculating large powers of $A^k$
+%----------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{TOPIC 3: Diagonalization}
 \end{document}
