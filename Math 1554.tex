@@ -1486,7 +1486,7 @@ Note: the columns of an echelon form B are often not in the column space of A
 %----------------------------------------------------------------------------------------------------------------------------------------%
 
 \subsection{TOPIC 9: Dimension and Rank}
-The main reason for a selecting a basis for a subspace H rather than just a spanning set is that each vector in H can bbe written in only one way as a linear combination of the basis vectors.
+The main reason for a selecting a basis for a subspace H rather than just a spanning set is that each vector in H can be written in only one way as a linear combination of the basis vectors.
 
 \emph{Coordinate vector:} for each x in a subspace H, 
 $$[x]_\mathfrak{B} = \begin{bmatrix}
@@ -1865,5 +1865,138 @@ If A and B are square matrices, then A is similar to B if there is a matrix P su
 This can lead to a more efficient algorithm for calculating large powers of $A^k$
 %----------------------------------------------------------------------------------------------------------------------------------------%
 
-\subsection{TOPIC 3: Diagonalization}
+\subsection{TOPIC 7: Diagonalisation}
+In many cases, the eigenvalue-eigenvector information of a matrix A can be displayed in the factorisation $A = PDP^{-1}$ where D is a diagonal matrix.
+
+This can be especially useful for quickly calculating large values of $A^k$ because, in general, 
+$$D^k = \begin{bmatrix}
+	a^k & 0\\
+	0 & b^k
+\end{bmatrix}$$
+
+\emph{Diagonalisable:} characteristic of a square matrix if it is similar to a diagonal matrix. In other words, $A = PDP^{-1}$ for invertible P and diagonal D. 
+
+\emph{The Diagonalisation Theorem:} an $n \times n$ matrix A is diagonalisable iff A has n linearly independent eigenvectors. 
+In other words, A is diagonalisable iff there are enough eigenvectors to form a basis of $\R^n$ (the \emph{eigenvector basis of $\R^n$})
+
+\subsubsection{Diagonlising matrices}
+\begin{enumerate}
+	\item Find the eigenvalues of A (usually by solving $\det (A - \lambda I) = 0$ with the use of a computer)
+	\item Find n linearly independent eigenvectors of A (if this step fails, A is not diagonalisable)
+	\item Construct P from the vectors of step 2 $P = \begin{bmatrix}
+		v_1 & ... & v_n
+	\end{bmatrix}$
+	\item Construct D from the corresponding eigenvalues in the order which matches the order of the columns of P 
+\end{enumerate}
+
+\emph{An $n \times n$ matrix with n distinct eigenvalues is diagonalisable}
+
+Let A be an $n \times n$ matrix whose distinct eigenvalues are $\lambda_1, ...,lambda_p$
+\begin{itemize}
+	\item For $1 \leq p$, the dimension of the eigenspace for $\lambda_k$ is less than or equal to the multiplicity of $\lambda_k$
+	\item A is diagonalisable iff the sum of the dimensions of the eigenspace equals n $\iff$ the characteristic polynomial factors completely into linear factors or the dimension of the eigenspace for each $\lambda_k$ equals the multiplicity of $\lambda_k$
+	\item If A is diagonal and $\mathfrak{B}_k$ is a basis for the eigenspace corresponding to $\lambda_k$ for each k, the total collection of vectors in $\mathfrak{B}_1, ..., \mathfrak{B}_p$ forms an eigenvector basis for $\R^n$
+\end{itemize}
+%----------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{TOPIC 8: Complex Eigenvalues}
+A complex scalar $\lambda$ satisfies $\det(A - \lambda I) = 0$ iff there is a nonzero vector $\vec{x} \in \mathbb{C}^n$ such that $A \vec{x} = \lambda \vec{x}$
+
+Example: Find a basis for the eigenspace of $A = \begin{bmatrix}
+	0.5 & -0.6\\
+	0.75 & 1.1
+\end{bmatrix}$
+
+Solution:
+\begin{align*}
+	0 = \begin{vmatrix}
+		0.5 - \lambda & -0.6\\
+		0.75 & 1.1 - \lambda
+	\end{vmatrix} &= (0.5 - \lambda)(1.1 - \lambda)- (-0.6)(0.75)\\
+	&= \lambda^2 -1.6 \lambda + 1
+\end{align*}
+
+From the quadratic formula,
+$$\lambda = \frac{1}{2}[1.6 \pm \sqrt{(-1.6)^2 - 4}] = 0.8 \pm 0.6i$$
+
+For $\lambda = 0.8 - 0.6i$, 
+$$A - (0.8 - 0.6i)I = \begin{bmatrix}
+	-0.3 + 0.6i & -0.6\\
+	0.75 & 0.3 + 0.6i
+\end{bmatrix}$$
+
+Row reduction is difficult but since $0.8 - 0.6i$ is an eigenvalue, the system 
+\begin{align*}
+	(-0.3 + 0.6i)x_1 - 0.6x_2 &= 0\\
+	0.75x_1 + (0.3 + 0.6i)x_2 &= 0
+\end{align*}
+has a nontrivial solution and either equation can be used to represent the other variable. 
+\begin{align*}
+	0.75x_1 &= (-0.3-0.6i)x_2\\
+	x_1 &= (-0.4 - 0.8i)x_2
+\end{align*}
+So, $x_1 = -2 - 4i$ when $x_2$ is chosen to be 5 to eliminate the decimals. The basis for the eigenspace corresponding to $\lambda = 0.8 - 0.6i$ is thus 
+$$v_1 = \begin{bmatrix}
+	-2 -4i\\
+	5
+\end{bmatrix}$$
+Analogous calculations for $\lambda = 0.8 + 0.6i$ yields 
+$$v_2 = \begin{bmatrix}
+	-2 + 4i\\
+	5
+\end{bmatrix}$$
+
+\subsubsection{Real and Imaginary parts of vectors}
+For some complex vector, x
+$$x = \Re x + i \Im x$$
+and its complex conjugate is 
+$$\bar{x} = \Re x - i \Im x$$
+
+Properties of complex matrix algebra:
+\begin{itemize}
+	\item $\bar{rx} = \bar{r} \bar{x}$
+	\item $\bar{Bx} = \bar{B} \bar{x}$
+	\item $\bar{BC} = \bar{B} \bar{C}$
+	\item $\bar{rB} = \bar{r} \bar{B}$
+\end{itemize}
+
+
+\emph{When an $n \times n$ matrix A is real, its complex eigenvalues occur in conjugate pairs}
+
+For A an $n \times n$ matrix with real entries where $\lambda$ is an eigenvalue of A and x is a corresponding eigenvector in $\mathbb{C}^n$, then $\bar{\lambda}$ is an eigenvalue with $\bar{x}$ a corresponding eigenvector.
+
+If $C = \begin{bmatrix}
+	a & -b\\
+	b & a
+\end{bmatrix}$ where a and b are real and not both zero, then the eigenvalues of C are $\lambda = a \pm bi$. If $r = |\lambda| = \sqrt{a^2 + b^2}$, then 
+$$C = r\begin{bmatrix}
+	a/r & -b/r\\
+	b/r & a/r
+\end{bmatrix} = \begin{bmatrix}
+	r & 0\\
+	0 & r
+\end{bmatrix} \begin{bmatrix}
+	\cos \phi & -\sin \phi\\
+	\sin \phi & \cos \phi
+\end{bmatrix}$$
+
+\emph{Argument of $\lambda = a + bi$}: $\phi$, the angle between the positive x-axis and the ray from (0, 0) through (a, b). 
+
+Thus, the transformation $\vec{x} \mapsto C\vec{x}$ may be viewed as the composition of a rotation through the angle $\phi$ and a scaling by $|\lambda|$
+
+Let A be a real $2 \times 2$ matrix with a complex eigenvalue $\lambda = a - bi (b \neq 0)$ and an associated eigenvector $v \in \mathbb{C}^2$. 
+
+Then
+$A = PCP^{-1}$, where $P = \begin{bmatrix} 
+	\Re v_1 & \Im v_1
+\end{bmatrix}$ and $C = \begin{bmatrix}
+	a & -b\\
+	b & a
+\end{bmatrix}$
+
+\emph{Invariant:} property of a space on which A acts as a rotation (with or without scaling) where every vector in that space is rotated into another point \emph{on that same} space
+%----------------------------------------------------------------------------------------------------------------------------------------%
+
+\subsection{TOPIC 9: Google Page Rank}
+
 \end{document}
