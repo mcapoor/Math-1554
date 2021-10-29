@@ -1695,8 +1695,8 @@ Since $\det A = 2$ the system has a unique solution. By Cramer's rule:
 
 \emph{Adjugate (classical adjoint) of A:} the transpose of the matrix of cofactors of A
 $$\text{adj}A = \begin{bmatrix}
-	C_{11} & C_{21} & ... C_{n1}\\
-	C_{12} & C_{22} & ... C_{n2}\\
+	C_{11} & C_{21} & ... & C_{n1}\\
+	C_{12} & C_{22} & ... & C_{n2}\\
 	\vdots & \vdots & & \vdots\\
 	C_{1n} & C_{2n} & ... & C_{nn}
 \end{bmatrix}$$
@@ -1726,7 +1726,7 @@ And $|\det A| = -28$, so the area of the parellelogram is 28.
 
 \subsubsection{Linear transformations}
 Let $T : \R^2 \mapsto \R^2$. If $S$ is a parallelogram in $\R^2$ and $T(S)$ is the set of images of points of S, 
-$$\{area of T(S)\} = |\det A| \{area of S\}$$
+$$\{\text{area of }T(S)\} = |\det A| \{\text{area of }S\}$$
 This statement is analogous for volume in $\R^3$
 
 %----------------------------------------------------------------------------------------------------------------------------------------%
@@ -1827,6 +1827,22 @@ Eigenvalue Theorems:
 	\item Stochastic matrices have an eigenvalue equal to 1
 	\item If $\vec{v}_1, \vec{v}_2, ..., \vec{v}_k$ are eigenvectors that correspond to distinct eigenvalues, then those eigenvectors are linearly independent
 \end{enumerate}
+
+From 3Blue1Brown:
+An easier way to compute simple eigenvalues is by recognising certain geometric characteristics.
+\begin{enumerate}
+	\item $\frac{1}{2}\text{tr}\begin{bmatrix}
+		a & b\\
+		c & d
+	\end{bmatrix} = \frac{a + d}{2} = m$
+	\item $\det \begin{bmatrix}
+		a & b\\
+		c & d
+	\end{bmatrix} = ad - bc = \lambda_1 \lambda_2 = p$
+	\item $\lambda_1 , \lambda_2 = m \pm \sqrt{m^2 - p}$
+\end{enumerate}
+
+This is equivalent to computing $(x - \lambda_1)(x - \lambda_2) = x^2 - (\lambda_1 + \lambda_2)x + \lambda_1 \lambda_2$ with the quadratic formula
 %----------------------------------------------------------------------------------------------------------------------------------------%
 \subsection{TOPIC 6: The Characteristic Equation}
 A scalar $\lambda$ is an eigenvalue of an $n \times n$ matrix A iff $\lambda$ satisfies the characteristic equation 
@@ -1891,7 +1907,7 @@ In other words, A is diagonalisable iff there are enough eigenvectors to form a 
 
 \emph{An $n \times n$ matrix with n distinct eigenvalues is diagonalisable}
 
-Let A be an $n \times n$ matrix whose distinct eigenvalues are $\lambda_1, ...,lambda_p$
+Let A be an $n \times n$ matrix whose distinct eigenvalues are $\lambda_1, ...,\lambda_p$
 \begin{itemize}
 	\item For $1 \leq p$, the dimension of the eigenspace for $\lambda_k$ is less than or equal to the multiplicity of $\lambda_k$
 	\item A is diagonalisable iff the sum of the dimensions of the eigenspace equals n $\iff$ the characteristic polynomial factors completely into linear factors or the dimension of the eigenspace for each $\lambda_k$ equals the multiplicity of $\lambda_k$
@@ -1999,4 +2015,106 @@ $A = PCP^{-1}$, where $P = \begin{bmatrix}
 
 \subsection{TOPIC 9: Google Page Rank}
 
+If P is a regular $m \times m$ matrix with $m \geq 2$, the following statements are all true:
+\begin{enumerate}
+	\item There is a stochastic matrix $\Pi$ such that $\lim \limits_{n \to \infty} P^n = \Pi$
+	\item Each column of $\Pi$ is the same probability vector q
+	\item For any initial probability vector $x_0$, $\lim \limits_{n \to \infty} P^n x_0 = q$
+	\item The vector q is the unique probability vector which is an eigenvector of P associated with the eigenvalue 1
+	\item All eigenvalues of P other than 1 have $|\lambda| < 1$
+\end{enumerate} 
+
+Because 
+The World Wide Web can be modeled as a directed graph, with vertices representing webpages and arrows representing links between pages. Let P be the huge transition matrix for this Markov chain. If P were regular, there is a vector q with entries representing occupation times. Because some "important" pages have links from other "important" pages and spend more time in that small group of important pages, occupation time correlates with the importance of a page, allowing Google to rank pages by the relative size of the corresponding entry in q for an appropriately chosen Markov chain.
+
+In general, a number of adjustments have to be made to regularise a simple random walk on the directed graph model:
+\begin{enumerate}
+	\item If j is a dangling node (absorbing state), replace column j of P with $\begin{bmatrix}
+		1/n\\
+		\vdots\\
+		1/n
+	\end{bmatrix}$ to form the matrix $P_*$
+	\item To correct for cycles,let p be the probability a surfer will pick from all possible links from page j with equal probability, $1 - p$ is the probability the surfer will pick \emph{any} web page so the new transition matrix will be 
+	$$G = p P_* + (1 - p)K$$
+	where K is an $n \times n$ matrix whose columns are $\begin{bmatrix}
+		1/n\\
+		\vdots\\
+		1/n
+	\end{bmatrix}$
+\end{enumerate}
+
+Google is said to use a value $p = 0.85$. Furthermore, the true PageRank algorithm uses a K whose columns are a probality vector v which can be different between individuals or groups of searchers.
+
+Though Google uses a variation of the Power Method of computing eigenvalues to compute the eigenvector associated with the eigenvalue 1 and it only takes between 50-100 iterations for Google-level accuracy, the computation of a new q takes Google days and is repeated every month. 
+
+
+%--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+\pagebreak
+\section{Module 4: Orthogonality}
+\subsection{TOPIC 1: Inner product, Length, Orthogonality}
+\emph{The Inner Product:} the number $\vec{u}^T \vec{v}$ for two $n \times 1$ vectors, often written $\vec{u} \cdot \vec{v}$ and also called the dot product.
+
+In other words,
+$$u \cdot v = \begin{bmatrix}
+	u_1 & u_2 & ... & u_n
+\end{bmatrix} \begin{bmatrix}
+	v_1\\
+	v_2\\
+	\vdots\\
+	v_n
+\end{bmatrix} = u_1 v_1 + u_2 v_2 + ... + u_n v_n$$
+
+Inner product theorems:
+\begin{enumerate}
+	\item $u \cdot v = v \cdot u$
+	\item $(u + v) \cdot w = u \cdot w + v \cdot w$
+	\item $(cu)\cdot v = c(u\cdot v) = u\cdot (cv)$
+	\item $u \cdot u \geq 0, \quad u \cdot u = 0 \iff u = \vec{0}$ 
+\end{enumerate}
+
+\emph{Norm:} the length of v is the nonnegative scalar $||v||$ defined by 
+$$||v|| = \sqrt{v \cdot v} = \sqrt{v_1^2 + v_2^2 + ... + v_n^2}$$
+
+For any scalar c,
+$$||c \vec{v}|| = |c| ||v||$$
+
+\emph{Unit vector:} a vector whose length is 1
+
+
+\emph{Normalising:} the process of creating a unit vector u in the same direction as some vector v by multiplying v by $1 / ||v||$ 
+
+\emph{Distance in $\R^n$:} for $u, v \in \R^n$, $$\text{dist}(u, v) = ||u - v||$$
+
+\subsubsection{Orthogonal vectors}
+Two lines through the origin in $\R^2$ or $\R^3$ determined by vectors u, v are geometrically perpendicular iff the distance from u to v is the same as distance from u to -v. 
+
+\begin{align*}
+	[\text{dist}(u, -v)]^2 &= ||u - (-v)||^2 = ||u + v||^2\\
+	&= (u + v) \cdot (u + v)\\
+	&= u \cdot (u + v) + v\cdot (u + v)\\
+	&= u \cdot u + u\cdot v + v\cdot u + v\cdot v\\
+	&= ||u||^2 + ||v||^2 + 2u \cdot v
+\end{align*}
+
+Two squared distances are equal iff $2 u \cdot v = -2 u \cdot v$ which happens iff $u\cdot v = 0$
+
+\textbf{Two vectors $u, v \in \R^n$ are orthogonal iff $$u \cdot v = 0 \iff ||u + v||^2 = ||u||^2 + ||v||^2$$}
+
+\subsubsection{Orthogonal complements}
+If a vector z is orthogonal to every vector in a subspace W of $\R^n$, z is orthogonal to W
+
+\emph{Orthogonal complement of W:} $W^\perp$, the set of all vectors that are orthogonal to W
+
+Orthogonal complement theorems:
+\begin{enumerate}
+	\item A vector x is in $W^\perp$ iff x is orthogonal to every vector in a set that spans W
+	\item $W^\perp$ is a subspace of $\R^n$
+	\item $(\text{Row }A)^\perp = \text{Nul }A, \quad (\text{Col } A)^\perp = \text{Nul }A^T$
+\end{enumerate}
+
+\subsubsection{Angles in $\R^2$ and $\R^3$}
+$$u\cdot v = ||u|| ||v|| \cos\theta$$
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{TOPIC 2: Orthogonal Sets}
 \end{document}
