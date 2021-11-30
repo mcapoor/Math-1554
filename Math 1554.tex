@@ -2261,7 +2261,7 @@ To summarize:
 Given a basis $\{x_1, ..., x_p\}$ for a nonzero subspace W of $\R^n$, define
 \begin{align*}
 	v_1 &= x_1\\
-	v_2 &= x_2 = \frac{x_2 \cdot v_1}{v_1 \cdot v_1} v_1\\
+	v_2 &= x_2 - \frac{x_2 \cdot v_1}{v_1 \cdot v_1} v_1\\
 	v_3 &= x_3 - \frac{x_3 \cdot v_1}{v_1 \cdot v_1} - \frac{x_3 \cdot v_2}{v_2 \cdot v_2}\\
 	\vdots\\
 	v_p &= x_p - \frac{x_p \cdot v_1}{v_1 \cdot v_1} - \frac{x_p \cdot v_2}{v_2 \cdot v_2} - ... - \frac{x_p \cdot v_{p-1}}{v_{p-1} \cdot v_{p-1}}
@@ -2293,5 +2293,598 @@ Solution:
 \subsubsection{QR Factorization of Matrices}
 If an $m \times n$ matrix has linearly independent columns $x_1, ..., x_n$, then applying the Gram-Schmidt process with normalizations is equivalent to factoring A.
 
-\emph{The QR Factorization:} If A is an $m \times n$ matrix with linearly independent columns, then A can be factored as A = QR where Q is an $m \times n$ matrix whose columns form an orthonormal basis for Col A and R is an $n \times n$ upper triangular invertible matrix with positive entries on its diagonal.
+\emph{The QR Factorization:} If A is an $m \times n$ matrix with linearly independent columns, then A can be factored as A = QR where Q is an $m \times n$ matrix whose columns form an orthonormal basis for Col A and R is an $n \times n$ upper triangular invertible matrix with positive entries on its diagonal. Further, $R= Q^T A$.
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{TOPIC 5: Least Squares Problem}
+\emph{The general least-squares problem:} question involving finding a close approximate x for an inconsistent equation $Ax = b$
+
+If A is $m \times n$ and b is in $\R^n$, a least-squares solution of Ax = b is $\hat{x}$ in $\R^n$ such that 
+$$||b - A\hat{x}|| \leq ||b - Ax||$$
+for all x in $\R^n$
+
+No matter what x we select, Ax will necessarily be in the column space. So we seek an x that makes Ax the closest point in Col A to b. 
+
+\subsubsection{Solution of the general problem}
+Apply the Best Approximation Theorem 
+	$$\hat{b} = \text{proj}_{\text{Col} A} b$$
+Then, because $\hat{b}$ is in the column space of A, $Ax = \hat{b}$ is consistent and there is a least-squares solution to
+$$A\hat{x} = \hat{b}$$
+
+The set of least-squares solutions of Ax = b coincides with the nonempty set of solutions of the normal equations 
+$$A^T Ax = A^T b$$
+
+For an $m \times n$ matrix A, the following statements are logically equivalent:
+\begin{enumerate}
+	\item The equation Ax = b has a unique least-squares solution for each b in $\R^n$
+	\item The columns of A are linearly independent
+	\item The matrix $A^T A$ is invertible
+\end{enumerate}
+When these statements are true, 
+$$\hat{x} = (A^T A)^{-1} A^T b$$
+
+\emph{Least-squares error:} the distance from b to $A\hat{x}$
+
+In some cases, the normal equations for a least-squares problem can be ill-conditioned. If the columns of A are linearly independent, the least-squares solution can often be computed more reliably through a QR factorisation:
+$$\hat{x} = R^{-1} Q^T b$$
+
+Numerical note: Since R is upper triangular, $\hat{x}$ should be calculated as the exact solution of 
+$$Rx = Q^T b$$
+%----------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{TOPIC 6: Application to Linear Models}
+The simplest relation between two variables x and y is the linear equation $y = \beta_0 + \beta_1 x$. Experimental data often produce points $(x_1, y_1), ..., (x_n, y_n)$ that lie close to a line.
+
+\emph{Least-squares line:} the line $y = \beta_0 + \beta_1 x$ that minimizes the sum of the squares of the residuals (errors). This line is also called a line of regression of y on x. 
+
+We can write this system as 
+$$X\beta = y$$
+where
+$$X = \begin{bmatrix}
+		1 & x_1\\
+		1 & x_2\\
+		\vdots & \vdots\\
+		1 & x_n
+	\end{bmatrix}, \quad \beta = \begin{bmatrix}
+		\beta_0 \\ \beta_1
+	\end{bmatrix}, \quad y = \begin{bmatrix}
+		y_1 \\ y_2\\ \vdots \\ y_n
+	\end{bmatrix}$$
+
+Then, computing the least-squares solution of $X\beta = y$ is equivalent to finding the $\beta$ that determines the least-squares line. 
+
+Example: Find the equation of the least-squares line that best fits the data points (2,1), (5,2), (7,3), and (8,3)
+$$X = \begin{bmatrix}
+	1 & 2\\
+	1 & 5\\
+	1 & 7\\
+	1 & 8
+\end{bmatrix}, \quad y = \begin{bmatrix}
+	1\\
+	2\\
+	3\\
+	3
+\end{bmatrix}$$
+Then, computing $X^T X beta = X^T y$ yields:
+$$\begin{bmatrix}
+	4 & 22\\
+	22 & 142
+\end{bmatrix} \begin{bmatrix}
+	\beta_0\\
+	\beta_1
+\end{bmatrix} = \begin{bmatrix}
+	9\\
+	57
+\end{bmatrix}$$
+Hence,
+$$\begin{bmatrix}
+	\beta_0\\
+	\beta_1
+\end{bmatrix} = \begin{bmatrix}
+	2/7\\
+	5/14
+\end{bmatrix}$$
+And the least-squares equation has the form 
+$$y = \frac{2}{7}+ \frac{5}{14}x$$
+
+A common practice before computing a least-squares line is to form a new variable $x^* = x - \bar{x}$ from the average of the original x-values. The new x-data are in mean-deviation form and the two columns of the design matrix will be orthogonal, simplifying solution of the normal equations. 
+
+\subsubsection{Least-squares fitting of other curves}
+\emph{Residual vector:} $\epsilon = y - X\beta$, whose length should be minimized to find a least-squares solution.
+
+For a quadratic curve:
+$$\begin{bmatrix}
+		y_1\\
+		y_2\\\
+		\vdots\\
+		y_n
+	\end{bmatrix} = \begin{bmatrix}
+		1 & x_1 & x_1^2\\ 
+		1 & x_2 & x_2^2\\ 
+		\vdots & \vdots & \vdots\\
+		1 & x_n & x_n^2\\ 
+	\end{bmatrix} \begin{bmatrix}
+		\beta_0\\
+		\beta_1\\
+		\beta_2
+	\end{bmatrix} + \begin{bmatrix}
+		\epsilon_1\\
+		\epsilon_2\\
+		\vdots\\
+		\epsilon_n
+	\end{bmatrix}$$
+$$y = X \beta + \epsilon$$
+
+Data can be fit to curves which have the general form 
+$$y = \beta_0 f_0 (x) + \beta_1 f_1 (x) + ... + \beta_k f_k (x)$$
+where $f_0, ..., f_k$ are known functions and $\beta_0, ..., \beta_k$ are parameters. 
+
+\subsubsection{Multiple regression}
+When an experiment involves two independent variables, the least-squares fit is called a trend surface and will be described by a linear model in the form 
+$$y = \beta_0 f_0(u, v) + \beta_1 f_1(u, v) + ... + \beta_k f_k(u, v)$$
+
+%--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------%
+\pagebreak
+\section{Module 5: Symmetric Matrices and Quadratic Forms}
+\subsection{TOPIC 1: Diagonalisation of Symmetric Matrices}
+\emph{Symmetric matrix:} a matrix A such that $A^T = A$ which is necessarily square. Its diagonal entries are arbitrary but all others occur in pairs on the main diagonal.
+$$A = \begin{bmatrix}
+	a & b & c\\
+	b & d & e\\
+	c & e & f
+\end{bmatrix}$$
+for example. 
+
+Diagonalisation review:
+$$A = \begin{bmatrix}
+	6 & -2 & -1\\
+	-2 & 6 & -1\\
+	-1 & -1 & 5
+\end{bmatrix}$$
+The characteristic equation is 
+$$0 = -\lambda^3 + 17\lambda^2 - 90\lambda + 144 = -(\lambda - 8)(\lambda - 6)(\lambda - 3)$$
+We can get a basis for each eigenspace:
+$$\lambda = 8: \vec{v}_1 = \begin{bmatrix}
+	-1\\1\\0
+\end{bmatrix}; \quad \lambda = 6: \vec{v}_1 = \begin{bmatrix}
+	-1\\1\\2
+\end{bmatrix}; \quad \lambda = 3: \vec{v}_1 = \begin{bmatrix}
+	1\\1\\1
+\end{bmatrix}$$
+These vectors form an orthogonal basis for $\R^3$. The normalised basis eigenvectors are:
+$$\vec{u}_1 = \begin{bmatrix}
+	-1/\sqrt{2}\\
+	1/\sqrt{2}\\
+	0
+\end{bmatrix}, \quad \vec{u}_2 = \begin{bmatrix}
+	-1/\sqrt{6}\\
+	1/\sqrt{6}\\
+	2/\sqrt{6}
+\end{bmatrix},
+\vec{u}_3 = \begin{bmatrix}
+	1/\sqrt{3}\\
+	1/\sqrt{3}\\
+	1/\sqrt{3}
+\end{bmatrix}$$
+Thus,
+$$A = PDP^{-1}$$
+$$P = \begin{bmatrix}
+	-1 & -1/\sqrt{6} & 1/\sqrt{3}\\
+	1 & 1/\sqrt{6} & 1/\sqrt{3}\\
+	0 & 2/\sqrt{6} & 1/\sqrt{3}
+\end{bmatrix}, \quad D = \begin{bmatrix}
+	8 & 0 & 0\\
+	0 & 6 & 0\\
+	0 & 0 & 3
+\end{bmatrix}$$
+
+Since P is square and an orthonormal matrix and $P^{-1} = P^T$
+
+\textbf{If A is symmetric, then any two eigenvectors from different eigenspaces are orthogonal.}
+
+\emph{Orthogonally diagonalisable:} An $n \times n$ matrix if there are an orthogonal matrix P and a diagonal matrix D such that 
+$$A = PDP^T = PDP^{-1}$$
+This diagonalisation requires n linearly independent and orthonormal eigenvectors.
+
+An $n\times n$ matrix A is orthogonally diagonalisable iff A is a symmetric matrix.
+
+
+\subsubsection{The Spectral Theorem}
+\emph{Spectrum:} the set of eigenvalues of a matrix A
+
+An $n \times n$ symmetric matrix A has the following properties
+\begin{enumerate}
+	\item A has n real eigenvalues, counting multiplicities
+	\item The dimension of the eigenspace for each eigenvalue $\lambda$ equals the multiplicity of $\lambda$ as a root of the characteristic equation
+	\item The eigenspaces are mutually orthogonal, in the sense that eigenvectors corresponding to different eigenvalues are orthogonal
+	\item A is orthogonally diagonalisable.
+\end{enumerate}
+
+\subsubsection{Spectral Decomposition:}
+For $A = PDP^{-1}$ where the columns of P are orthonormal eigenvectors $u_1, ..., u_n$ of A and the corresponding eigenvalues $\lambda_1, ..., \lambda_n$ are in the diagonal matrix D. Thus:
+$$A = \lambda_1 u_1 u_1^T + \lambda_2 u_2 u_2^T + ... + \lambda_n u_n u_n^T$$
+
+Every term in this spectral decomposition is an $n\times n$ matrix of rank 1 (e.g. every column of $\lambda_1 u_1 u_1^T$ is a multiple of $u_1$).
+Every matrix $u_j u_j^T$ is a projection matrix such that $(u_j u_j^T)x = \text{proj}_{\text{Span}\{u_j\}} x$
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{TOPIC 2: Quadratic Forms}
+\emph{Quadratic form:} a function Q defined on $\R^n$ whose value at a vector $x \in \R^n$ can be computed by an expression of the form $Q(x) = x^T Ax$ where A is an $n \times n$ symmetric matrix
+
+Example:
+For $x \in \R^3$, 
+
+\begin{align*}
+	Q(x) &= 5x_1^2 + 3x_2^2 + 2x_3^2 - x_1 x_2 + 8x_2 x_3\\
+	&= \begin{bmatrix}
+		x_1 & x_2 & x_3
+	\end{bmatrix} \begin{bmatrix}
+		5 & -1/2 & 0\\
+		-1/2 & 3 & 4\\
+		0 & 4 & 2
+	\end{bmatrix} \begin{bmatrix}
+		x_1\\
+		x_2\\
+		x_3
+	\end{bmatrix}
+\end{align*}
+
+\subsubsection{Change of Variable in a Quadratic Form}
+Using a change of variable $y = P^{-1} x$ (where y is the coordinate vector of x relative to the basis of $\R^n$ determined by the columns of P),
+$$x^T A x = (Py)^T A (Py) = y^T P^T A P y = y^T (P^T A P)y$$
+and so the matrix of the quadratic form is $P^T AP$. 
+Since A is symmetric, there is an orthogonal matrix P such that $P^T AP = D$ and the quadratic form is just 
+$$y^T D y$$
+
+\subsubsection{Principal Axes}
+\emph{The Principal Axes Theorem:} If A is an $n \times n$ symmetric matrix, then there is an orthogonal change of variable $x = Py$ that transforms the quadratic form $x^TAx$ into a quadratic form $y^T D y$ with no cross-product term. 
+
+\emph{Principal axes:} the columns of P in the theorem which form the orthonormal basis of $\R^n$ for which y is the relative coordinate vector of x.
+
+The set of all $\vec{x} \in \R^2$ that satisfy $x^T A x = c$ for some constant c corresponds to 
+\begin{enumerate}
+	\item an ellipse (or circle)
+	\item a hyperbola
+	\item two intersecting lines
+	\item a single point
+	\item or contains no points at all
+\end{enumerate}
+
+\pagebreak
+If A is a diagonal matrix, the graph is in standard position:
+
+\includegraphics[width=\textwidth]
+{Standard position.png}
+
+Else, the graph is rotated out of standard position and finding the principal axes (determined by the eigenvectors of A) amounts to finding a new coordinate system with respect to which the graph is in standard position.
+
+\includegraphics[width=\textwidth]{Not standard position.png}
+
+\subsubsection{Classifying Quadratic Forms}
+A qaudratic form Q is:
+\begin{enumerate}
+	\item positive definite if $Q(x) > 0, \quad \forall x \neq 0$ (as in Fig A)
+	\item Negative definite $Q(x) < 0, \quad \forall x \neq 0$ (as in Fig D)
+	\item Positive semidefinite $Q(x) \geq 0, \quad \forall x \neq 0$ (as in Fig A and B)
+	\item Negative semidefinite $Q(x) \leq 0, \quad \forall x \neq 0$ (as in Fig A and B)
+	\item indefinite if Q(X) assumes both positive and negative values (as in Fig C)
+\end{enumerate}
+\includegraphics[width=\textwidth]{Quadratic Forms.png}
+
+Let A be an $n\times n$ symmetric matrix. Then a quadratic form $x^T A x$ is:
+\begin{enumerate}
+	\item positive definite iff the eigenvalues of A are all positive
+	\item negative definite iff the eigenvalues of A are all negative
+	\item indefinite iff A has both positive and negative eigenvalues
+\end{enumerate}
+
+\emph{Cholesky Factorisation:} this attempt to factor A into the form $A = R^T R$ where R is upper triangular wiht positive diagonal entries can be a fast way to determine whether a symmetric matrix A is positive definite but is possible iff A is positive definite.
+
+%----------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{TOPIC 3: Constrained Optimization}
+Example: The surface of a unit sphere in $\R^3$ is given by 
+$$1 = x_1^2 +x_2^2 + x_3^2 = ||\vec{x}||^2$$
+Q is a quantity (for example, temperature) that we wish to optimize
+$$Q(\vec{x}) = 9x_1^2 + 4x_2^2 + 3x_3^2$$
+Identify the largest and smallest values of Q on the surface.
+
+Solution:
+\begin{align*}
+	Q = \vec{x}^T \begin{bmatrix}
+		9 & 0 & 0\\
+		0 & 4 & 0\\
+		0 & 0 & 3
+	\end{bmatrix} \vec{x} &= 9x_1^2 + 4x_2^2 + 3x_3^2\\
+	&\leq  9x_1^2 + 9x_2^2 + 9x_3^2\\
+	&= 9(x_1^2 +x_2^2 + x_3^2) = 9||\vec{x}||^2 = 9
+\end{align*}
+Because $||\vec{x}||^2 = 1$, the max occurs at $\vec{x} = \begin{bmatrix}
+	\pm 1\\
+	0\\
+	0
+\end{bmatrix}$ 
+Similarly,
+min{$Q(\vec{x}) : ||\vec{x}|| = 1\} = 3$ which occurs at $\vec{x} = \begin{bmatrix}
+	0\\
+	0\\
+	\pm 1
+\end{bmatrix}$
+The minimum and maximum values of Q were the eigenvalues of A and the corresponding eigenvectors gave their location. 
+
+\subsubsection{The General Form}
+If $Q = x^T A x$, A is a real $n \times n$ symmetric matrix, with eigenvalues 
+$$\lambda_1 \geq \lambda_2 ... \geq \lambda_n$$
+and with associated normalised eigenvectors
+$$u_1, u_2, ..., u_n$$
+Then, subject to the constraint $||x|| = 1$, 
+\begin{enumerate}
+	\item the maximum of $Q(x) = \lambda_1$, attained at $x = \pm u_1$
+	\item the minimum of $Q(x) = \lambda_n$, attained at $x = \pm u_n$
+\end{enumerate}
+
+\subsubsection{Constrained optimisation with a repeated eigenvalue}
+Example: Calculate the max and min of 
+$Q = x_1^2 + 2x_2 x_3$ subject to $||x|| = 1$
+
+Solution:
+$$Q = x^T \begin{bmatrix}
+		1 & 0 & 0\\
+		0 & 0 & 1\\
+		0 & 1 & 0
+	\end{bmatrix} x$$
+By inspection, 
+$$\lambda = 1 \implies v_1 = \begin{bmatrix}
+	1 \\0\\0
+\end{bmatrix}, \quad v_2 = \frac{1}{\sqrt{2}}\begin{bmatrix}
+	0\\1\\1
+\end{bmatrix}$$
+Because A is symmetric, the eigenvector for $\lambda = -1$ must be orthogonal to $v_1$ and $v_2$. By inspection,
+$$v_3 = \frac{1}{\sqrt{2}} \begin{bmatrix}
+	0\\1\\-1
+\end{bmatrix}$$
+Therefore, the minimum value of Q is -1, obtained at $\pm v_3$ and the max is 1, obtained at a vector in the span of $v_1$ and $v_2$
+
+\subsubsection{Orthogonality Constraints}
+If $Q = x^T A x$, A is a real $n \times n$ symmetric matrix, with eigenvalues 
+$$\lambda_1 \geq \lambda_2 ... \geq \lambda_n$$
+and with associated normalised eigenvectors
+$$u_1, u_2, ..., u_n$$
+Then, subject to the constraints $||x|| = 1$ and $\vec{x} \cdot \vec{u}_1 = 0$, 
+\begin{enumerate}
+	\item the maximum of $Q(x) = \lambda_2$, attained at $x = u_2$
+	\item the minimum of $Q(x) = \lambda_n$, attained at $x = u_n$
+\end{enumerate}
+%----------------------------------------------------------------------------------------------------------------------------------------%
+\subsection{TOPIC 4: The Singular Value Decomposition}
+\emph{Singular value:} the square roots of the eigenvalues of $A^T A$ for some real $m \times n$ A, usually arranged in decreasing order $\sigma_1... \sigma_n$
+In general, 
+$$\sigma_i = ||A\vec{v}_i||$$
+where A is a linear transform acting on the unit vector v.
+
+The eigenvalues of $A^T A$ will always be real and non-negative
+
+\emph{Singular vectors:} the eigenvectors of $A^T A$
+
+Suppose that $v_i$ are the ordered n orthogonal eigenvectors of $A^T A$ and that A has r non-zero singular values($r \leq n$). Then the set of vectors 
+$$\{v_{r+1}, v_{r+2}, ..., v_n\}$$
+is an orthogonal basis for Nul A and the set
+$$\{v_1, v_2, ..., v_r\}$$
+is an orthogonal basis for Row A and rank A = r
+
+If those $v_i$ are orthonormal, then
+$$\{Av_1, Av_2,..., Av_r\}$$
+are an orthogonal basis for Col A.
+
+Summary:
+\includegraphics[width=\textwidth]{Fundamental subspaces.png}
+
+Examples: 
+$A \in \R^{12 \times 4}$ with 3 non-zero singular values. Indicate whether the following statements are true or false
+\begin{enumerate}
+	\item A basis for Col A is given by $Av_1, Av_2, Av_3$
+	\item A basis for Nul A is given by $v_1, v_2, v_3$
+\end{enumerate}
+
+Solutions:
+\begin{enumerate}
+	\item True: A has rank 3, the vectors are independent and in Col A, so they form a basis for Col A
+	\item False: A has rank 3, so the vectors form a basis for Row A. $v_4$ forms a basis for Nul A
+\end{enumerate}
+
+\subsubsection{The SVD}
+Suppose A is an $m\times n$ matrix with singular values $\sigma_1 \geq \sigma_2 \geq ... \geq \sigma_n$ and $m \geq n$. Then A has the decomposition 
+$$A = U \Sigma V^T$$
+$$\Sigma = \begin{bmatrix}
+	D\\
+	\vec{0}_{m-n, n}
+\end{bmatrix}, \quad D = \begin{bmatrix}
+	\sigma_1 & 0 & ... & 0\\
+	0 & \sigma_2 & ... & \vdots\\
+	\vdots & \vdots & \ddots & \vdots\\
+	0 & 0 & ... & \sigma_n
+\end{bmatrix}$$
+U is a $m \times m$ orthogonal matrix and V is an $n \times n$ orthogonal matrix.
+
+If $m < n$, then $\Sigma = \begin{bmatrix}
+	D & \vec{0}_{m, n-m}
+\end{bmatrix}$ with everything else the same. 
+
+A Procedure for Constructing the SVD:
+Suppose A is $m \times n$ and has rank r.
+\begin{enumerate}
+	\item Compute the squared singular values of $A^T A$ ($\sigma_i^2$) and construct $\Sigma$
+	\item Compute the unit singular vectors of $A^T A$ ($v_i$) and use them to form V
+	\item Compute an orthonormal basis for Col A using
+	$$u_i = \frac{1}{\sigma_i} A v_i, \quad i = 1, 2, ... r$$
+	If necessary, extend $\{u_i\}$ to form an orthonormal basis for $\R^m$ and use the basis to form U.
+\end{enumerate}
+
+Example:
+Construct the SVD for $A = \begin{bmatrix}
+	2 & 0\\
+	0 & -3\\
+	0 & 0\\
+	0 & 0
+\end{bmatrix}$
+
+Solution:
+$$A^T A = \begin{bmatrix}
+	4 & 0\\
+	0 & 9
+\end{bmatrix} \implies \lambda_1 = 9, \lambda_2 = 4$$
+Thus,
+$$\Sigma = \begin{bmatrix}
+	3 & 0\\
+	0 & 2\\
+	0 & 0\\
+	0 & 0
+\end{bmatrix}$$
+
+Next,
+\begin{align*}
+	A^T A - \lambda_1 I &= \begin{bmatrix}
+		-5 & 0\\
+		0 & 0
+	\end{bmatrix} \implies v_1 = \begin{bmatrix}
+		0\\1
+	\end{bmatrix}\\
+	A^T A - \lambda_2 I &= \begin{bmatrix}
+		-5 & 0\\
+		0 & 0
+	\end{bmatrix} \implies v_1 = \begin{bmatrix}
+		1\\0
+	\end{bmatrix}\\
+	&\implies V = \begin{bmatrix}
+		\vec{v}_1 & \vec{v}_2
+	\end{bmatrix} = \begin{bmatrix}
+		0 & 1\\
+		1 & 0
+	\end{bmatrix}
+\end{align*}
+
+Next we construct left-singular unit vectors in $\R^4$
+\begin{align*}
+	u_1 &= \frac{1}{\sigma_1} A v_1 = \frac{1}{3} \begin{bmatrix}
+		2 & 0\\
+		0 & -3\\
+		0 & 0\\
+		0 & 0
+	\end{bmatrix} \begin{bmatrix}
+		0\\1
+	\end{bmatrix} = \begin{bmatrix}
+		0\\-1\\0\\0
+	\end{bmatrix}\\
+	u_2 &= \frac{1}{\sigma_2} A v_2 = \frac{1}{2} \begin{bmatrix}
+		2 & 0\\
+		0 & -3\\
+		0 & 0\\
+		0 & 0
+	\end{bmatrix} \begin{bmatrix}
+		1\\0
+	\end{bmatrix} = \begin{bmatrix}
+		1\\0\\0\\0
+	\end{bmatrix}\\
+\end{align*}
+
+$u_3$ and $u_4$ can be any two vectors orthogonal to $u_1$ and $u_2$. For example
+$$u_3 = \begin{bmatrix}
+	0\\0\\1\\0
+\end{bmatrix}, \quad v_4 = \begin{bmatrix}
+	0\\0\\0\\1
+\end{bmatrix}$$
+
+Finally,
+$$A = \begin{bmatrix}
+	2 & 0\\
+	0 & -3\\
+	0 & 0\\
+	0 & 0
+\end{bmatrix} = \begin{bmatrix}
+	0 & 1 & 0 & 0\\
+	-1 & 0 & 0 & 0\\
+	0 & 0 & 1 & 0\\
+	0 & 0 & 0 & 1
+\end{bmatrix} \begin{bmatrix}
+	3 & 0\\
+	0 & 2\\
+	0 & 0\\
+	0 & 0
+\end{bmatrix} \begin{bmatrix}
+	0 & 1\\
+	1 & 0
+\end{bmatrix}$$
+
+Example: Construct the SVD of $A = \begin{bmatrix}
+	1 & -1\\
+	-2 & 2\\
+	2 & -2
+\end{bmatrix}$
+
+Solution:
+$$A^T A = \begin{bmatrix}
+	9 & -9\\
+	-9 & 9
+\end{bmatrix}$$
+So $\sigma_1 = \sqrt{18}$ and $\sigma_2 = 0$ and 
+$$\Sigma = \begin{bmatrix}
+	3 \sqrt 2 & 0\\
+	0 & 0\\
+	0 & 0
+\end{bmatrix}$$
+
+Constructing the right-singular vectors to form V:
+$$v_1 = \frac{1}{\sqrt{2}} \begin{bmatrix}
+	1\\-1
+\end{bmatrix}, \quad v_2 = \frac{1}{\sqrt{2}} \begin{bmatrix}
+	1\\1
+\end{bmatrix}$$
+So
+$$V = \frac{1}{\sqrt{2}} \begin{bmatrix}
+	1 & 1\\
+	-1 & 1
+\end{bmatrix}$$
+
+Next we construct the left-singular vectors.
+$$u_1 = \frac{1}{3\sqrt{2}}\begin{bmatrix}
+	1 & -1\\
+	-2 & 2\\
+	2 & -2
+\end{bmatrix} \begin{bmatrix}
+	1/\sqrt{2}\\
+	-1/\sqrt{2}
+\end{bmatrix} = \frac{1}{3} \begin{bmatrix}
+	1\\-2\\2
+\end{bmatrix}$$
+
+By inspection, two other vectors orthogonal to $u_1$ are
+$$x_2 = \begin{bmatrix}
+	2\\1\\0
+\end{bmatrix}, \quad x_3 = \begin{bmatrix}
+	-2 \\0\\1
+\end{bmatrix}$$
+Because $u_1 \in$ Col A, these vectors are in (Col A$)^\perp$. U is an orthogonal matrix so we use the Gram-Schmidt method to create an orthogonal basis for (Col A$)^\perp$:
+$$u_2 = \frac{1}{\sqrt{5}} \begin{bmatrix}
+	2\\1\\0
+\end{bmatrix}, \quad u_3 = \frac{1}{\sqrt{45}}\begin{bmatrix}
+	-2\\4\\-5
+\end{bmatrix}$$
+
+Finally, 
+$$A = \begin{bmatrix}
+	1 & -1\\
+	-2 & 2\\
+	2 & -2
+\end{bmatrix} = \begin{bmatrix}
+	1/3 & 2/\sqrt{5} & -2\sqrt{45}\\
+	-2/3 & 1/\sqrt{5} & 4\sqrt{45}\\
+	2/3 & 0 & -5\sqrt{45}\\
+\end{bmatrix} \begin{bmatrix}
+	3 \sqrt 2 & 0\\
+	0 & 0\\
+	0 & 0
+\end{bmatrix} \begin{bmatrix}
+	1/\sqrt{2} & 1/\sqrt{2} \\
+	-1/\sqrt{2} & 1/\sqrt{2} 
+\end{bmatrix}$$
+
+
 \end{document}
